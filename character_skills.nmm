@@ -1,0 +1,148 @@
+# Fire Emblem Three Houses Editor
+# Character table of learned skills
+
+1
+FETH Character Skills Editor by HeartHero
+0x16CE8
+35
+62
+Characters.txt
+NULL
+
+Personal Skill
+20
+1
+NDHU
+Skills.txt
+
+Timeskip Skill
+21
+1
+NDHU
+Skills.txt
+
+Skill 3
+22
+1
+NDHU
+Skills.txt
+
+Skill 3 Unlock Category
+0
+1
+NDHU
+Category.txt
+
+Skill 3 Requirement
+42
+1
+NDHU
+Ranks.txt
+
+Skill 4
+23
+1
+NDHU
+Skills.txt
+
+Skill 4 Unlock Category
+1
+1
+NDHU
+Category.txt
+
+Skill 4 Requirement
+43
+1
+NDHU
+Ranks.txt
+
+Skill 5
+24
+1
+NDHU
+Skills.txt
+
+Skill 5 Unlock Category
+2
+1
+NDHU
+Category.txt
+
+Skill 5 Requirement
+44
+1
+NDHU
+Ranks.txt
+
+Skill 6
+25
+1
+NDHU
+Skills.txt
+
+Skill 6 Unlock Category
+3
+1
+NDHU
+Category.txt
+
+Skill 6 Requirement
+45
+1
+NDHU
+Ranks.txt
+
+Skill 7
+26
+1
+NDHU
+Skills.txt
+
+Skill 7 Unlock Category
+4
+1
+NDHU
+Category.txt
+
+Skill 7 Requirement
+46
+1
+NDHU
+Ranks.txt
+
+Skill 8
+27
+1
+NDHU
+Skills.txt
+
+Skill 8 Unlock Category
+5
+1
+NDHU
+Category.txt
+
+Skill 8 Requirement
+47
+1
+NDHU
+Ranks.txt
+
+Skill 9
+28
+1
+NDHU
+Skills.txt
+
+Skill 9 Unlock Category
+6
+1
+NDHU
+Category.txt
+
+Skill 9 Requirement
+48
+1
+NDHU
+Ranks.txt

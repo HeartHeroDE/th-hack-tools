@@ -1,0 +1,239 @@
+238
+0x0 Sword Prowess Lv 1
+0x1 Sword Prowess Lv 2
+0x2 Sword Prowess Lv 3
+0x3 Sword Prowess Lv 4
+0x4 Sword Prowess Lv 5
+0x5 Lance Prowess Lv 1
+0x6 Lance Prowess Lv 2
+0x7 Lance Prowess Lv 3
+0x8 Lance Prowess Lv 4
+0x9 Lance Prowess Lv 5
+0xA Axe Prowess Lv 1
+0xB Axe Prowess Lv 2
+0xC Axe Prowess Lv 3
+0xD Axe Prowess Lv 4
+0xE Axe Prowess Lv 5
+0xF Bow Prowess Lv 1
+0x10 Bow Prowess Lv 2
+0x11 Bow Prowess Lv 3
+0x12 Bow Prowess Lv 4
+0x13 Bow Prowess Lv 5
+0x14 Brawling Prowess Lv 1
+0x15 Brawling Prowess Lv 2
+0x16 Brawling Prowess Lv 3
+0x17 Brawling Prowess Lv 4
+0x18 Brawling Prowess Lv 5
+0x19 Reason Lv 1
+0x1A Reason Lv 2
+0x1B Reason Lv 3
+0x1C Reason Lv 4
+0x1D Reason Lv 5
+0x1E Faith Lv 1
+0x1F Faith Lv 2
+0x20 Faith Lv 3
+0x21 Faith Lv 4
+0x22 Faith Lv 5
+0x23 Authority Lv 1
+0x24 Authority Lv 2
+0x25 Authority Lv 3
+0x26 Authority Lv 4
+0x27 Authority Lv 5
+0x28 Swordfaire
+0x29 Lancefaire
+0x2A Axefaire
+0x2B Bowfaire
+0x2C Fistfaire
+0x2D Black Tomefaire
+0x2E White Tomefaire
+0x2F Dark Tomefaire
+0x30 Sword Crit +10
+0x31 Lance Crit +10
+0x32 Axe Crit +10
+0x33 Bow Crit +10
+0x34 Brawl Crit +10
+0x35 Black Magic Crit +10
+0x36 White Magic Crit +10
+0x37 Dark Magic Crit +10
+0x38 Sword Avo +20
+0x39 Lance Avo +20
+0x3A Axe Avo +20
+0x3B Bow Avo +20
+0x3C Brawl Avo +20
+0x3D Black Magic Avo +20
+0x3E White Magic Avo +20
+0x3F Dark Magic Avo +20
+0x40 HP +5
+0x41 Strength +2
+0x42 Magic +2
+0x43 Dexterity +4
+0x44 Speed +2
+0x45 Pomp & Circumstance
+0x46 Defense +2
+0x47 Resistance +2
+0x48 Movement +1
+0x49 Hit +20
+0x4A Avo +10
+0x4B Crit +20
+0x4C Defiant Str
+0x4D Defiant Mag
+0x4E Defiant Spd
+0x4F Defiant Def
+0x50 Defiant Res
+0x51 Defiant Avo
+0x52 Defiant Crit
+0x53 Imperial Lineage
+0x54 Royal Lineage
+0x55 Leicester Lineage
+0x56 Mastermind
+0x57 Death Blow
+0x58 Fiendish Blow
+0x59 Darting Blow
+0x5A Armored Blow
+0x5B Warding Blow
+0x5C Officer Duty
+0x5D Lady Knight
+0x5E Watchful Eye
+0x5F Distinguished House
+0x60 Veteran Knight
+0x61 Charm
+0x62 Advocate
+0x63 Guardian
+0x64 Lily's Poise
+0x65 Infirmary Master
+0x66 Philanderer
+0x67 Rivalry
+0x68 Born Fighter
+0x69 Rally Strength
+0x6A Rally Magic
+0x6B Rally Speed
+0x6C Rally Defense
+0x6D Rally Resistance
+0x6E Rally Movement
+0x6F Rally Dexterity
+0x70 Rally Luck
+0x71 Rally Charm
+0x72 Seal Strength
+0x73 Seal Magic
+0x74 Seal Speed
+0x75 Seal Defense
+0x76 Seal Resistance
+0x77 Seal Movement
+0x78 Heartseeker
+0x79 Swordbreaker+
+0x7A Lancebreaker+
+0x7B Axebreaker+
+0x7C Bowbreaker
+0x7D Fistbreaker
+0x7E Tomebreaker
+0x7F Model Leader
+0x80 Defensive Tactics
+0x81 Offensive Tactics
+0x82 Fire
+0x83 Miasma
+0x84 Heal
+0x85 Renewal
+0x86 Catnap
+0x87 Goody Basket
+0x88 Songstress
+0x89 Hunter's Boon
+0x8A Poison Strike
+0x8B Live to Serve
+0x8C Lifetaker
+0x8D Survival Instinct
+0x8E Lethality
+0x8F Poison
+0x90 Pavise
+0x91 Aegis
+0x92 Miracle
+0x93 Terrain Resistance
+0x94 Special Dance
+0x95 Paragon
+0x96 Professor's Guidance
+0x97 Discipline
+0x98 Aptitude
+0x99 Vantage
+0x9A Missing Number
+0x9B Desperation
+0x9C Quick Riposte
+0x9D Wrath
+0x9E Dance
+0x9F Steal
+0xA0 Locktouch
+0xA1 Stealth
+0xA2 Canto
+0xA3 Pass
+0xA4 Swordbreaker
+0xA5 Lancebreaker
+0xA6 Bowrange +1
+0xA7 Bowrange +2
+0xA8 Black Magic Range +1
+0xA9 Dark Magic Range +1
+0xAA White Magic Range +1
+0xAB Unarmed Combat
+0xAC Black Magic Uses x2
+0xAD Dark Magic Uses x2
+0xAE White Magic Uses x2
+0xAF White Magic Heal +5
+0xB0 White Magic Heal +10
+0xB1 Weight -3
+0xB2 Weight -5
+0xB3 Axebreaker
+0xB4 Unsealable Magic
+0xB5 Immune Status
+0xB6 General
+0xB7 Commander
+0xB8 Infinite Magic
+0xB9 Magic Bind
+0xBA Infantry Effect Null
+0xBB Armored Effect Null
+0xBC Cavalry Effect Null
+0xBD Flying Effect Null
+0xBE Dragon Effect Null
+0xBF Monster Effect Null
+0xC0 Effect Null
+0xC1 Air of Intimidation
+0xC2 Vital Defense
+0xC3 Giant Wings
+0xC4 Anti-Magic Armor
+0xC5 Divine Dragon Horn
+0xC6 Path of the Conqueror
+0xC7 Noncombatant
+0xC8 Battalion Desperation
+0xC9 Cursed Power
+0xCA Anchor
+0xCB Counterattack
+0xCC Twin Crests
+0xCD Ancient Dragon Wrath
+0xCE Surging Light
+0xCF Ancient Dragonskin
+0xD0 Keen Intuition
+0xD1 Staunch Shield
+0xD2 Lone Wolf
+0xD3 Fighting Spirit
+0xD4 Confidence
+0xD5 Persecution Complex
+0xD6 Animal Friend
+0xD7 Perseverance
+0xD8 Crest Scholar
+0xD9 Compassion
+0xDA Lockpick
+0xDB Battalion Vantage
+0xDC Battalion Wrath
+0xDD Battalion Renewal
+0xDE Black Magic Uses Up+
+0xDF Dark Magic Uses x4
+0xE0 White Magic Uses Up+
+0xE1 Mighty King of Legend
+0xE2 10 Elites
+0xE3 Alert Stance
+0xE4 Alert Stance+
+0xE5 Close Counter
+0xE6 Professor's Guidance+
+0xE7 Imperial Lineage+
+0xE8 Royal Lineage+
+0xE9 Leicester Lineage+
+0xEA Murderous Intent
+0xEB Sacred Power
+0xEC Agarthan Technology
+0xED Blade Breaker
