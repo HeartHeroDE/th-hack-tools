@@ -16,3 +16,7 @@ This module is for editing the skills that are bound to characters. Characters h
 ### character_stats.nmm
 
 This module is for editing base stats, max stats, growths, crests and some additional data. Pretty much self-explanatory. There is however a little bit of data stored within character blocks that I haven't deciphered yet.
+
+### character_spells.nmm
+
+This module is for editing spell lists of characters. Still have to figure out how to change the necessary ranks as well though.
