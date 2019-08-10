@@ -1,0 +1,214 @@
+# Fire Emblem Three Houses Editor
+# Character data table
+
+1
+FETH Character Stats Editor by HeartHero
+0xD3
+35
+76
+Characters.txt
+NULL
+
+Unknown
+0
+8
+HEXA
+NULL
+
+Unknown
+9
+8
+HEXA
+NULL
+
+Age
+28
+1
+NEDS
+NULL
+
+Birthday
+30
+1
+NEDS
+NULL
+
+Birth month
+31
+1
+NEDS
+NULL
+
+Unknown
+32
+3
+HEXA
+NULL
+
+Faction
+36
+2
+NDHU
+Factions.txt
+
+Max HP
+35
+1
+NEDU
+NULL
+
+Growth HP
+38
+1
+NEDU
+NULL
+
+Base HP
+40
+1
+NEDU
+NULL
+
+Unknown
+41
+1
+NEDS
+NULL
+
+Crest Slot 1
+42
+1
+NDHU
+Crests.txt
+
+Crest Slot 2
+43
+1
+NDHU
+Crests.txt
+
+#Unknown
+#44
+#1
+#HEXA
+#NULL
+
+Height
+45
+1
+NEDU
+NULL
+
+Height (Timeskip)
+46
+1
+NEDU
+NULL
+
+Base STR
+49
+1
+NEDU
+NULL
+
+Base MAG
+50
+1
+NEDU
+NULL
+
+Base DEX
+51
+1
+NEDU
+NULL
+
+Base SPD
+52
+1
+NEDU
+NULL
+
+Base LCK
+53
+1
+NEDU
+NULL
+
+Base DEF
+54
+1
+NEDU
+NULL
+
+Base RES
+55
+1
+NEDU
+NULL
+
+Base MOV
+56
+1
+NEDU
+NULL
+
+Base CHA
+57
+1
+NEDU
+NULL
+
+Growth STR
+58
+1
+NEDS
+NULL
+
+Growth MAG
+59
+1
+NEDS
+NULL
+
+Growth DEX
+60
+1
+NEDS
+NULL
+
+Growth SPD
+61
+1
+NEDS
+NULL
+
+Growth LCK
+62
+1
+NEDS
+NULL
+
+Growth DEF
+63
+1
+NEDS
+NULL
+
+Growth RES
+64
+1
+NEDS
+NULL
+
+Growth MOV
+65
+1
+NEDS
+NULL
+
+Growth CHA
+66
+1
+NEDS
+NULL

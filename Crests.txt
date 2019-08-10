@@ -1,0 +1,50 @@
+49
+0x0 Crest of Ernest
+0x1 Crest of Macuil
+0x2 Crest of Seiros
+0x3 Crest of Dominic
+0x4 Crest of Fraldarius
+0x5 Crest of Noa
+0x6 Crest of Cethleann
+0x7 Crest of Daphnel
+0x8 Crest of Blaiddyd
+0x9 Crest of Gloucester
+0xA Crest of Goneril
+0xB Crest of Cichol
+0xC Crest of Aubin
+0xD Crest of Gautier
+0xE Crest of Indech
+0xF Crest of the Beast
+0x10 Crest of Charon
+0x11 Crest of Timotheos
+0x12 Crest of Riegan
+0x13 Crest of Chevalier
+0x14 Crest of Lamine
+0x15 Crest of Flames
+0x16 Minor Crest of Ernest
+0x17 Minor Crest of Macuil
+0x18 Minor Crest of Seiros
+0x19 Minor Crest of Dominic
+0x1A Minor Crest of Fraldarius
+0x1B Minor Crest of Noa
+0x1C Minor Crest of Cethleann
+0x1D Minor Crest of Daphnel
+0x1E Minor Crest of Blaiddyd
+0x1F Minor Crest of Gloucester
+0x20 Minor Crest of Goneril
+0x21 Minor Crest of Cichol
+0x22 Minor Crest of the Oban
+0x23 Minor Crest of Gautier
+0x24 Minor Crest of Indech
+0x25 Minor Crest of the Beast
+0x26 Minor Crest of Charon
+0x27 Minor Crest of Timotheos
+0x28 Minor Crest of Riegan
+0x29 Minor Crest of Chevalier
+0x2A Minor Crest of Lamine
+0x2B Minor Crest of Flames
+0x2C Agarthan Crest
+0x2D Crest of the Forge
+0x2E Mystery Crest
+0x2F Minor Mystery Crest
+0x56 No Crest
