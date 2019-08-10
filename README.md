@@ -7,7 +7,7 @@ As of August 9 of 2019 there is no way of extracting contents of DATA1.bin with 
 
 Most of the interesting data is stored in `000000000000000c.dat` as this chunk stores a lot of tables with character data, skill data etc.
 
-It's offset within Data0 is `10EA800` and the initial length is `83580C` - keep that in mind since this is the file my current modules will be compatible with. Once you are done you can just replace this giant block of data.
+It's offset within Data1 is `10EA800` and the initial length is `83580C` - keep that in mind since this is the file my current modules will be compatible with. Once you are done you can just replace this giant block of data.
 
 ### character_skills.nmm
 
