@@ -1,22 +1,21 @@
-# th-hack-tools
+# TH Hacking Toolkit
+
 Tools for hacking Fire Emblem: Three Houses
 
-## Extracting contents
+## What is this?
 
-As of August 9 of 2019 there is no way of extracting contents of DATA1.bin with keeping the file structure intact - you will only get chunks but those are quite helpful to have at least some sort of structure. You can use QuickBMS and a script made for Musou Switch games for now.
+This is a toolkit for editing data of Fire Emblem: Three Houses. So far there is a character editor for stats, growths, skills, spell lists, crests and more. I am planning to release more tools in the future so stay tuned.
 
-Most of the interesting data is stored in `000000000000000c.dat` as this chunk stores a lot of tables with character data, skill data etc.
+If you want to contribute, your help is very welcome.
 
-It's offset within Data1 is `10EA800` and the initial length is `83580C` - keep that in mind since this is the file my current modules will be compatible with. Once you are done you can just replace this giant block of data.
+If you don't want to use the toolkit there is also a folder with useful Nightmare Modules.
 
-### character_skills.nmm
+**No support for extracting contents** - This toolkit works directly with Data1.bin so it should be very easy to use anyway. No need to extract files for now.
 
-This module is for editing the skills that are bound to characters. Characters have an individual list of skills that they can learn once they reach a certain level in a category. You can change the categories as well as the level requirements and the associated skills. Each character possesses a personal skill as well, but not necessarily a timeskip skill. Timeskip skills are personal skills that will replace the personal skill once this point of the story was reached.
+![Crest and Spell editor](https://i.imgur.com/BgBbdCR.png)
 
-### character_stats.nmm
+### Priorities for the next release:
 
-This module is for editing base stats, max stats, growths, crests and some additional data. Pretty much self-explanatory. There is however a little bit of data stored within character blocks that I haven't deciphered yet.
-
-### character_spells.nmm
-
-This module is for editing spell lists of characters. Still have to figure out how to change the necessary ranks as well though.
+* Adding a class editor
+* Adding a combat art list editor
+* Creating a basic randomizer
