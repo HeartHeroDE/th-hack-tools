@@ -78,7 +78,7 @@
             // 
             this.Group_Editors.Controls.Add(this.tableLayoutPanel1);
             this.Group_Editors.Enabled = false;
-            this.Group_Editors.Location = new System.Drawing.Point(206, 12);
+            this.Group_Editors.Location = new System.Drawing.Point(210, 12);
             this.Group_Editors.Name = "Group_Editors";
             this.Group_Editors.Padding = new System.Windows.Forms.Padding(6);
             this.Group_Editors.Size = new System.Drawing.Size(200, 145);
@@ -105,7 +105,7 @@
             // 
             // Button_OpenFile
             // 
-            this.Button_OpenFile.Location = new System.Drawing.Point(12, 34);
+            this.Button_OpenFile.Location = new System.Drawing.Point(16, 34);
             this.Button_OpenFile.Name = "Button_OpenFile";
             this.Button_OpenFile.Size = new System.Drawing.Size(188, 74);
             this.Button_OpenFile.TabIndex = 5;
@@ -115,7 +115,7 @@
             // 
             // Button_Github
             // 
-            this.Button_Github.Location = new System.Drawing.Point(12, 114);
+            this.Button_Github.Location = new System.Drawing.Point(16, 114);
             this.Button_Github.Name = "Button_Github";
             this.Button_Github.Size = new System.Drawing.Size(188, 34);
             this.Button_Github.TabIndex = 6;
@@ -126,7 +126,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Location = new System.Drawing.Point(16, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 7;
