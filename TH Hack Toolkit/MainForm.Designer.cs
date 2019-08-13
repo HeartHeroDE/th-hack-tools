@@ -141,7 +141,9 @@
             this.Controls.Add(this.Button_Github);
             this.Controls.Add(this.Button_OpenFile);
             this.Controls.Add(this.Group_Editors);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "TH Hacking Toolkit";
             this.Group_Editors.ResumeLayout(false);
