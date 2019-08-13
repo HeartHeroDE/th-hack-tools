@@ -1,6 +1,7 @@
 # TH Hacking Toolkit
 
 Tools for hacking Fire Emblem: Three Houses
+Requires .NET Framework v. 4.6
 
 ## What is this?
 
