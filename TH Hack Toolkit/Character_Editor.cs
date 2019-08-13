@@ -104,6 +104,15 @@ namespace th_hack_tools
                 Box_Skill9.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.Skills[skill]);
             }
 
+            foreach (int art in Program.THData.Arts.Keys)
+            {
+                Box_CombatArt1.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.Arts[art]);
+                Box_CombatArt2.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.Arts[art]);
+                Box_CombatArt3.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.Arts[art]);
+                Box_CombatArt4.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.Arts[art]);
+                Box_CombatArt5.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.Arts[art]);
+            }
+
         }
 
         private void List_Characters_SelectedIndexChanged(object sender, EventArgs e)
@@ -196,6 +205,24 @@ namespace th_hack_tools
             ComboBoxSelect(Box_Skill7Requirement, current_character.skills.Values["skill_requirement7"].Value);
             ComboBoxSelect(Box_Skill8Requirement, current_character.skills.Values["skill_requirement8"].Value);
             ComboBoxSelect(Box_Skill9Requirement, current_character.skills.Values["skill_requirement9"].Value);
+
+            ComboBoxSelect(Box_CombatArt1, current_character.arts.Values["art_1"].Value);
+            ComboBoxSelect(Box_CombatArt2, current_character.arts.Values["art_2"].Value);
+            ComboBoxSelect(Box_CombatArt3, current_character.arts.Values["art_3"].Value);
+            ComboBoxSelect(Box_CombatArt4, current_character.arts.Values["art_4"].Value);
+            ComboBoxSelect(Box_CombatArt5, current_character.arts.Values["art_5"].Value);
+
+            ComboBoxSelect(Box_CombatArt1_Category, current_character.arts.Values["art_1_category"].Value);
+            ComboBoxSelect(Box_CombatArt2_Category, current_character.arts.Values["art_2_category"].Value);
+            ComboBoxSelect(Box_CombatArt3_Category, current_character.arts.Values["art_3_category"].Value);
+            ComboBoxSelect(Box_CombatArt4_Category, current_character.arts.Values["art_4_category"].Value);
+            ComboBoxSelect(Box_CombatArt5_Category, current_character.arts.Values["art_5_category"].Value);
+
+            ComboBoxSelect(Box_CombatArt1_Requirement, current_character.arts.Values["art_1_requirement"].Value);
+            ComboBoxSelect(Box_CombatArt2_Requirement, current_character.arts.Values["art_2_requirement"].Value);
+            ComboBoxSelect(Box_CombatArt3_Requirement, current_character.arts.Values["art_3_requirement"].Value);
+            ComboBoxSelect(Box_CombatArt4_Requirement, current_character.arts.Values["art_4_requirement"].Value);
+            ComboBoxSelect(Box_CombatArt5_Requirement, current_character.arts.Values["art_5_requirement"].Value);
 
             ComboBoxSelect(Box_Classes, current_character.Values["character_class"].Value);
             reload = false;
@@ -637,6 +664,96 @@ namespace th_hack_tools
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void Box_CombatArt1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_1"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_2"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_3"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_4"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_5"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt1_Category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_1_category"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt2_Category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_2_category"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt3_Category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_3_category"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt4_Category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_4_category"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt5_Category_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_5_category"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt1_Requirement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_1_requirement"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt2_Requirement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_2_requirement"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt3_Requirement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_3_requirement"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt4_Requirement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_4_requirement"].Value = ComboBoxHex((ComboBox)sender);
+        }
+
+        private void Box_CombatArt5_Requirement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!reload)
+                current_character.arts.Values["art_5_requirement"].Value = ComboBoxHex((ComboBox)sender);
         }
     }
 }

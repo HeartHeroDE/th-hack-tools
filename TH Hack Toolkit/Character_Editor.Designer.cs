@@ -173,6 +173,27 @@
             this.Box_Age = new System.Windows.Forms.NumericUpDown();
             this.Text_Name = new System.Windows.Forms.TextBox();
             this.Label_Name = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Box_CombatArt5_Requirement = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt5_Category = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt5 = new System.Windows.Forms.ComboBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.Box_CombatArt4_Requirement = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt4_Category = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt4 = new System.Windows.Forms.ComboBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.Box_CombatArt3_Requirement = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt3_Category = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt3 = new System.Windows.Forms.ComboBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.Box_CombatArt2_Requirement = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt2_Category = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt2 = new System.Windows.Forms.ComboBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.Box_CombatArt1_Requirement = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt1_Category = new System.Windows.Forms.ComboBox();
+            this.Box_CombatArt1 = new System.Windows.Forms.ComboBox();
+            this.label56 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -224,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Age)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // List_Characters
@@ -298,6 +320,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(13, 147);
             this.tabControl1.Name = "tabControl1";
@@ -2210,6 +2233,366 @@
             this.Label_Name.TabIndex = 0;
             this.Label_Name.Text = "Name";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.Box_CombatArt5_Requirement);
+            this.tabPage4.Controls.Add(this.Box_CombatArt5_Category);
+            this.tabPage4.Controls.Add(this.Box_CombatArt5);
+            this.tabPage4.Controls.Add(this.label52);
+            this.tabPage4.Controls.Add(this.Box_CombatArt4_Requirement);
+            this.tabPage4.Controls.Add(this.Box_CombatArt4_Category);
+            this.tabPage4.Controls.Add(this.Box_CombatArt4);
+            this.tabPage4.Controls.Add(this.label53);
+            this.tabPage4.Controls.Add(this.Box_CombatArt3_Requirement);
+            this.tabPage4.Controls.Add(this.Box_CombatArt3_Category);
+            this.tabPage4.Controls.Add(this.Box_CombatArt3);
+            this.tabPage4.Controls.Add(this.label54);
+            this.tabPage4.Controls.Add(this.Box_CombatArt2_Requirement);
+            this.tabPage4.Controls.Add(this.Box_CombatArt2_Category);
+            this.tabPage4.Controls.Add(this.Box_CombatArt2);
+            this.tabPage4.Controls.Add(this.label55);
+            this.tabPage4.Controls.Add(this.Box_CombatArt1_Requirement);
+            this.tabPage4.Controls.Add(this.Box_CombatArt1_Category);
+            this.tabPage4.Controls.Add(this.Box_CombatArt1);
+            this.tabPage4.Controls.Add(this.label56);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(496, 322);
+            this.tabPage4.TabIndex = 4;
+            this.tabPage4.Text = "Combat Arts";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // Box_CombatArt5_Requirement
+            // 
+            this.Box_CombatArt5_Requirement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt5_Requirement.FormattingEnabled = true;
+            this.Box_CombatArt5_Requirement.Items.AddRange(new object[] {
+            "0x0 E",
+            "0x1 E+",
+            "0x2 D",
+            "0x3 D+",
+            "0x4 C",
+            "0x5 C+",
+            "0x6 B",
+            "0x7 B+",
+            "0x8 A",
+            "0x9 A+",
+            "0xA S",
+            "0xB S+"});
+            this.Box_CombatArt5_Requirement.Location = new System.Drawing.Point(405, 236);
+            this.Box_CombatArt5_Requirement.Name = "Box_CombatArt5_Requirement";
+            this.Box_CombatArt5_Requirement.Size = new System.Drawing.Size(70, 23);
+            this.Box_CombatArt5_Requirement.TabIndex = 53;
+            this.Box_CombatArt5_Requirement.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt5_Requirement_SelectedIndexChanged);
+            // 
+            // Box_CombatArt5_Category
+            // 
+            this.Box_CombatArt5_Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt5_Category.FormattingEnabled = true;
+            this.Box_CombatArt5_Category.Items.AddRange(new object[] {
+            "0x0 Sword",
+            "0x1 Lance",
+            "0x2 Axe",
+            "0x3 Bow",
+            "0x4 Brawl",
+            "0x5 Reason",
+            "0x6 Faith",
+            "0x7 Authority",
+            "0x8 Hvy Armor",
+            "0x9 Riding",
+            "0xA Flying",
+            "0xFF Empty"});
+            this.Box_CombatArt5_Category.Location = new System.Drawing.Point(261, 236);
+            this.Box_CombatArt5_Category.Name = "Box_CombatArt5_Category";
+            this.Box_CombatArt5_Category.Size = new System.Drawing.Size(126, 23);
+            this.Box_CombatArt5_Category.TabIndex = 52;
+            this.Box_CombatArt5_Category.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt5_Category_SelectedIndexChanged);
+            // 
+            // Box_CombatArt5
+            // 
+            this.Box_CombatArt5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt5.DropDownWidth = 200;
+            this.Box_CombatArt5.FormattingEnabled = true;
+            this.Box_CombatArt5.Location = new System.Drawing.Point(123, 236);
+            this.Box_CombatArt5.Name = "Box_CombatArt5";
+            this.Box_CombatArt5.Size = new System.Drawing.Size(121, 23);
+            this.Box_CombatArt5.TabIndex = 51;
+            this.Box_CombatArt5.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt5_SelectedIndexChanged);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(21, 239);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(77, 15);
+            this.label52.TabIndex = 50;
+            this.label52.Text = "Combat Art 5";
+            // 
+            // Box_CombatArt4_Requirement
+            // 
+            this.Box_CombatArt4_Requirement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt4_Requirement.FormattingEnabled = true;
+            this.Box_CombatArt4_Requirement.Items.AddRange(new object[] {
+            "0x0 E",
+            "0x1 E+",
+            "0x2 D",
+            "0x3 D+",
+            "0x4 C",
+            "0x5 C+",
+            "0x6 B",
+            "0x7 B+",
+            "0x8 A",
+            "0x9 A+",
+            "0xA S",
+            "0xB S+"});
+            this.Box_CombatArt4_Requirement.Location = new System.Drawing.Point(405, 196);
+            this.Box_CombatArt4_Requirement.Name = "Box_CombatArt4_Requirement";
+            this.Box_CombatArt4_Requirement.Size = new System.Drawing.Size(70, 23);
+            this.Box_CombatArt4_Requirement.TabIndex = 49;
+            this.Box_CombatArt4_Requirement.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt4_Requirement_SelectedIndexChanged);
+            // 
+            // Box_CombatArt4_Category
+            // 
+            this.Box_CombatArt4_Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt4_Category.FormattingEnabled = true;
+            this.Box_CombatArt4_Category.Items.AddRange(new object[] {
+            "0x0 Sword",
+            "0x1 Lance",
+            "0x2 Axe",
+            "0x3 Bow",
+            "0x4 Brawl",
+            "0x5 Reason",
+            "0x6 Faith",
+            "0x7 Authority",
+            "0x8 Hvy Armor",
+            "0x9 Riding",
+            "0xA Flying",
+            "0xFF Empty"});
+            this.Box_CombatArt4_Category.Location = new System.Drawing.Point(261, 196);
+            this.Box_CombatArt4_Category.Name = "Box_CombatArt4_Category";
+            this.Box_CombatArt4_Category.Size = new System.Drawing.Size(126, 23);
+            this.Box_CombatArt4_Category.TabIndex = 48;
+            this.Box_CombatArt4_Category.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt4_Category_SelectedIndexChanged);
+            // 
+            // Box_CombatArt4
+            // 
+            this.Box_CombatArt4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt4.DropDownWidth = 200;
+            this.Box_CombatArt4.FormattingEnabled = true;
+            this.Box_CombatArt4.Location = new System.Drawing.Point(123, 196);
+            this.Box_CombatArt4.Name = "Box_CombatArt4";
+            this.Box_CombatArt4.Size = new System.Drawing.Size(121, 23);
+            this.Box_CombatArt4.TabIndex = 47;
+            this.Box_CombatArt4.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt4_SelectedIndexChanged);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(21, 199);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(77, 15);
+            this.label53.TabIndex = 46;
+            this.label53.Text = "Combat Art 4";
+            // 
+            // Box_CombatArt3_Requirement
+            // 
+            this.Box_CombatArt3_Requirement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt3_Requirement.FormattingEnabled = true;
+            this.Box_CombatArt3_Requirement.Items.AddRange(new object[] {
+            "0x0 E",
+            "0x1 E+",
+            "0x2 D",
+            "0x3 D+",
+            "0x4 C",
+            "0x5 C+",
+            "0x6 B",
+            "0x7 B+",
+            "0x8 A",
+            "0x9 A+",
+            "0xA S",
+            "0xB S+"});
+            this.Box_CombatArt3_Requirement.Location = new System.Drawing.Point(405, 156);
+            this.Box_CombatArt3_Requirement.Name = "Box_CombatArt3_Requirement";
+            this.Box_CombatArt3_Requirement.Size = new System.Drawing.Size(70, 23);
+            this.Box_CombatArt3_Requirement.TabIndex = 45;
+            this.Box_CombatArt3_Requirement.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt3_Requirement_SelectedIndexChanged);
+            // 
+            // Box_CombatArt3_Category
+            // 
+            this.Box_CombatArt3_Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt3_Category.FormattingEnabled = true;
+            this.Box_CombatArt3_Category.Items.AddRange(new object[] {
+            "0x0 Sword",
+            "0x1 Lance",
+            "0x2 Axe",
+            "0x3 Bow",
+            "0x4 Brawl",
+            "0x5 Reason",
+            "0x6 Faith",
+            "0x7 Authority",
+            "0x8 Hvy Armor",
+            "0x9 Riding",
+            "0xA Flying",
+            "0xFF Empty"});
+            this.Box_CombatArt3_Category.Location = new System.Drawing.Point(261, 156);
+            this.Box_CombatArt3_Category.Name = "Box_CombatArt3_Category";
+            this.Box_CombatArt3_Category.Size = new System.Drawing.Size(126, 23);
+            this.Box_CombatArt3_Category.TabIndex = 44;
+            this.Box_CombatArt3_Category.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt3_Category_SelectedIndexChanged);
+            // 
+            // Box_CombatArt3
+            // 
+            this.Box_CombatArt3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt3.DropDownWidth = 200;
+            this.Box_CombatArt3.FormattingEnabled = true;
+            this.Box_CombatArt3.Location = new System.Drawing.Point(123, 156);
+            this.Box_CombatArt3.Name = "Box_CombatArt3";
+            this.Box_CombatArt3.Size = new System.Drawing.Size(121, 23);
+            this.Box_CombatArt3.TabIndex = 43;
+            this.Box_CombatArt3.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt3_SelectedIndexChanged);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(21, 159);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(77, 15);
+            this.label54.TabIndex = 42;
+            this.label54.Text = "Combat Art 3";
+            // 
+            // Box_CombatArt2_Requirement
+            // 
+            this.Box_CombatArt2_Requirement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt2_Requirement.FormattingEnabled = true;
+            this.Box_CombatArt2_Requirement.Items.AddRange(new object[] {
+            "0x0 E",
+            "0x1 E+",
+            "0x2 D",
+            "0x3 D+",
+            "0x4 C",
+            "0x5 C+",
+            "0x6 B",
+            "0x7 B+",
+            "0x8 A",
+            "0x9 A+",
+            "0xA S",
+            "0xB S+"});
+            this.Box_CombatArt2_Requirement.Location = new System.Drawing.Point(405, 117);
+            this.Box_CombatArt2_Requirement.Name = "Box_CombatArt2_Requirement";
+            this.Box_CombatArt2_Requirement.Size = new System.Drawing.Size(70, 23);
+            this.Box_CombatArt2_Requirement.TabIndex = 41;
+            this.Box_CombatArt2_Requirement.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt2_Requirement_SelectedIndexChanged);
+            // 
+            // Box_CombatArt2_Category
+            // 
+            this.Box_CombatArt2_Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt2_Category.FormattingEnabled = true;
+            this.Box_CombatArt2_Category.Items.AddRange(new object[] {
+            "0x0 Sword",
+            "0x1 Lance",
+            "0x2 Axe",
+            "0x3 Bow",
+            "0x4 Brawl",
+            "0x5 Reason",
+            "0x6 Faith",
+            "0x7 Authority",
+            "0x8 Hvy Armor",
+            "0x9 Riding",
+            "0xA Flying",
+            "0xFF Empty"});
+            this.Box_CombatArt2_Category.Location = new System.Drawing.Point(261, 117);
+            this.Box_CombatArt2_Category.Name = "Box_CombatArt2_Category";
+            this.Box_CombatArt2_Category.Size = new System.Drawing.Size(126, 23);
+            this.Box_CombatArt2_Category.TabIndex = 40;
+            this.Box_CombatArt2_Category.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt2_Category_SelectedIndexChanged);
+            // 
+            // Box_CombatArt2
+            // 
+            this.Box_CombatArt2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt2.DropDownWidth = 200;
+            this.Box_CombatArt2.FormattingEnabled = true;
+            this.Box_CombatArt2.Location = new System.Drawing.Point(123, 117);
+            this.Box_CombatArt2.Name = "Box_CombatArt2";
+            this.Box_CombatArt2.Size = new System.Drawing.Size(121, 23);
+            this.Box_CombatArt2.TabIndex = 39;
+            this.Box_CombatArt2.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt2_SelectedIndexChanged);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(21, 120);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(77, 15);
+            this.label55.TabIndex = 38;
+            this.label55.Text = "Combat Art 2";
+            // 
+            // Box_CombatArt1_Requirement
+            // 
+            this.Box_CombatArt1_Requirement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt1_Requirement.FormattingEnabled = true;
+            this.Box_CombatArt1_Requirement.Items.AddRange(new object[] {
+            "0x0 E",
+            "0x1 E+",
+            "0x2 D",
+            "0x3 D+",
+            "0x4 C",
+            "0x5 C+",
+            "0x6 B",
+            "0x7 B+",
+            "0x8 A",
+            "0x9 A+",
+            "0xA S",
+            "0xB S+"});
+            this.Box_CombatArt1_Requirement.Location = new System.Drawing.Point(405, 77);
+            this.Box_CombatArt1_Requirement.Name = "Box_CombatArt1_Requirement";
+            this.Box_CombatArt1_Requirement.Size = new System.Drawing.Size(70, 23);
+            this.Box_CombatArt1_Requirement.TabIndex = 37;
+            this.Box_CombatArt1_Requirement.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt1_Requirement_SelectedIndexChanged);
+            // 
+            // Box_CombatArt1_Category
+            // 
+            this.Box_CombatArt1_Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt1_Category.FormattingEnabled = true;
+            this.Box_CombatArt1_Category.Items.AddRange(new object[] {
+            "0x0 Sword",
+            "0x1 Lance",
+            "0x2 Axe",
+            "0x3 Bow",
+            "0x4 Brawl",
+            "0x5 Reason",
+            "0x6 Faith",
+            "0x7 Authority",
+            "0x8 Hvy Armor",
+            "0x9 Riding",
+            "0xA Flying",
+            "0xFF Empty"});
+            this.Box_CombatArt1_Category.Location = new System.Drawing.Point(261, 77);
+            this.Box_CombatArt1_Category.Name = "Box_CombatArt1_Category";
+            this.Box_CombatArt1_Category.Size = new System.Drawing.Size(126, 23);
+            this.Box_CombatArt1_Category.TabIndex = 36;
+            this.Box_CombatArt1_Category.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt1_Category_SelectedIndexChanged);
+            // 
+            // Box_CombatArt1
+            // 
+            this.Box_CombatArt1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_CombatArt1.DropDownWidth = 200;
+            this.Box_CombatArt1.FormattingEnabled = true;
+            this.Box_CombatArt1.Location = new System.Drawing.Point(123, 77);
+            this.Box_CombatArt1.Name = "Box_CombatArt1";
+            this.Box_CombatArt1.Size = new System.Drawing.Size(121, 23);
+            this.Box_CombatArt1.TabIndex = 35;
+            this.Box_CombatArt1.SelectedIndexChanged += new System.EventHandler(this.Box_CombatArt1_SelectedIndexChanged);
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(21, 80);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(77, 15);
+            this.label56.TabIndex = 34;
+            this.label56.Text = "Combat Art 1";
+            // 
             // Character_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2280,6 +2663,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Age)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2430,6 +2815,27 @@
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ComboBox Box_CombatArt5_Requirement;
+        private System.Windows.Forms.ComboBox Box_CombatArt5_Category;
+        private System.Windows.Forms.ComboBox Box_CombatArt5;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.ComboBox Box_CombatArt4_Requirement;
+        private System.Windows.Forms.ComboBox Box_CombatArt4_Category;
+        private System.Windows.Forms.ComboBox Box_CombatArt4;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.ComboBox Box_CombatArt3_Requirement;
+        private System.Windows.Forms.ComboBox Box_CombatArt3_Category;
+        private System.Windows.Forms.ComboBox Box_CombatArt3;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ComboBox Box_CombatArt2_Requirement;
+        private System.Windows.Forms.ComboBox Box_CombatArt2_Category;
+        private System.Windows.Forms.ComboBox Box_CombatArt2;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.ComboBox Box_CombatArt1_Requirement;
+        private System.Windows.Forms.ComboBox Box_CombatArt1_Category;
+        private System.Windows.Forms.ComboBox Box_CombatArt1;
+        private System.Windows.Forms.Label label56;
     }
 }
 
