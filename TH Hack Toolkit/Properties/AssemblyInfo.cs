@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TH Hacking Toolkit")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Hacking Toolkit for Fire Emblem: Three Houses")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TH Hacking Toolkit")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyProduct("th-hack-tools")]
+[assembly: AssemblyCopyright("Copyright © HeartHero 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0644d3e4-5c60-4a5a-a0b9-61a40ad77a2b")]
+[assembly: Guid("c121839a-3a55-4aee-968f-5bfb6a4c63f8")]
 
 // Version information for an assembly consists of the following four values:
 //

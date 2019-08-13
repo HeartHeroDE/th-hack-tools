@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TH_Hacking_Toolkit
+namespace th_hack_tools
 {
     static class Program
     {
@@ -16,7 +16,9 @@ namespace TH_Hacking_Toolkit
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
+
+        public static th_data THData;
     }
 }
