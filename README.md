@@ -16,6 +16,6 @@ If you don't want to use the toolkit there is also a folder with useful Nightmar
 
 ### Priorities for the next release:
 
-* Adding a class editor
+* Adding a class editor [DONE]
 * Adding a combat art list editor
 * Creating a basic randomizer
