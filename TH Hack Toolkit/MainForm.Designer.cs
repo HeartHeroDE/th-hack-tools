@@ -130,7 +130,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 0.1a";
+            this.label1.Text = "Version 0.1b";
             // 
             // MainForm
             // 
