@@ -28,9 +28,9 @@ namespace th_hack_tools
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            foreach(string character in Program.THData.Characters.Values)
+            foreach(int character in Program.THData.Characters.Keys)
             {
-                List_Characters.Items.Add(character);
+                List_Characters.Items.Add("0x" + character.ToString("X2") + " " + Program.THData.Characters[character]);
             }
 
             foreach (int crest in Program.THData.Crests.Keys)
@@ -88,9 +88,9 @@ namespace th_hack_tools
         {
             reload = true;
             string character_name = List_Characters.SelectedItem.ToString();
-            current_character = Program.THData.get_character(character_name);
+            current_character = Program.THData.get_character(List_Characters.SelectedIndex);
 
-            pictureBox1.Image = GetImageByName(character_name + "_s");
+            pictureBox1.Image = GetImageByName(Regex.Match(character_name, @"0x[0-9a-fA-F]+ (.*)").Groups[1].Value + "_s");
             Text_Name.Text = character_name;
 
             Box_Age.Value = current_character.Values["age"].Value;

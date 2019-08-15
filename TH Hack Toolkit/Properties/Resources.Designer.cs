@@ -103,9 +103,19 @@ namespace th_hack_tools.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Byleth_s {
+        internal static System.Drawing.Bitmap Byleth__Female__s {
             get {
-                object obj = ResourceManager.GetObject("Byleth_s", resourceCulture);
+                object obj = ResourceManager.GetObject("Byleth (Female)_s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Byleth__Male__s {
+            get {
+                object obj = ResourceManager.GetObject("Byleth (Male)_s", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -47,6 +47,8 @@ namespace th_hack_tools
             // Get data from text tables
             Character_data = new List<THCharacter>();
             Characters = read_name_table(TextTable, 0x47CF7);
+            Characters[0] = "Byleth (Male)";
+            Characters[1] = "Byleth (Female)";
 
             Crests = read_name_table(TextTable, 0x1178A6, 0x117C5D);
             Crests.Add(0xFF, "No Crest");
@@ -121,9 +123,8 @@ namespace th_hack_tools
             return bits;
         }
 
-        public THCharacter get_character(string name)
+        public THCharacter get_character(int index)
         {
-            int index = Characters.FirstOrDefault(s => s.Value == name).Key;
             return Character_data[index];
         }
 
@@ -380,7 +381,7 @@ namespace th_hack_tools
             skills = new THClassSkills(data.Tables[3], index);
             requirements = new THClassRequirements(data.Tables[1], index);
 
-            Values.Add("growth_hp", new THint(30, RAW));
+            Values.Add("growth_hp", new THint(20, RAW));
             Values.Add("growth_str", new THint(21, RAW));
             Values.Add("growth_mag", new THint(22, RAW));
             Values.Add("growth_dex", new THint(23, RAW));
@@ -391,16 +392,16 @@ namespace th_hack_tools
             Values.Add("growth_mov", new THint(28, RAW));
             Values.Add("growth_cha", new THint(29, RAW));
 
-            Values.Add("base_hp", new THint(76, RAW));
-            Values.Add("base_str", new THint(85, RAW));
-            Values.Add("base_mag", new THint(86, RAW));
-            Values.Add("base_dex", new THint(87, RAW));
-            Values.Add("base_spd", new THint(88, RAW));
-            Values.Add("base_lck", new THint(89, RAW));
-            Values.Add("base_def", new THint(90, RAW));
-            Values.Add("base_res", new THint(91, RAW));
-            Values.Add("base_mov", new THint(92, RAW));
-            Values.Add("base_cha", new THint(93, RAW));
+            Values.Add("base_hp", new THint(76, RAW, false));
+            Values.Add("base_str", new THint(85, RAW, false));
+            Values.Add("base_mag", new THint(86, RAW, false));
+            Values.Add("base_dex", new THint(87, RAW, false));
+            Values.Add("base_spd", new THint(88, RAW, false));
+            Values.Add("base_lck", new THint(89, RAW, false));
+            Values.Add("base_def", new THint(90, RAW, false));
+            Values.Add("base_res", new THint(91, RAW, false));
+            Values.Add("base_mov", new THint(92, RAW, false));
+            Values.Add("base_cha", new THint(93, RAW, false));
 
             Values.Add("exp_sword", new THint(57, RAW));
             Values.Add("exp_lance", new THint(58, RAW));
@@ -484,23 +485,23 @@ namespace th_hack_tools
         {
             RAW = data.contents[character_index].ToArray();
 
-            Values.Add("art_1", new THint(1, RAW));
-            Values.Add("art_2", new THint(2, RAW));
-            Values.Add("art_3", new THint(3, RAW));
-            Values.Add("art_4", new THint(4, RAW));
-            Values.Add("art_5", new THint(5, RAW));
+            Values.Add("art_1", new THint(1, RAW, false));
+            Values.Add("art_2", new THint(2, RAW, false));
+            Values.Add("art_3", new THint(3, RAW, false));
+            Values.Add("art_4", new THint(4, RAW, false));
+            Values.Add("art_5", new THint(5, RAW, false));
 
-            Values.Add("art_1_category", new THint(11, RAW));
-            Values.Add("art_2_category", new THint(12, RAW));
-            Values.Add("art_3_category", new THint(13, RAW));
-            Values.Add("art_4_category", new THint(14, RAW));
-            Values.Add("art_5_category", new THint(15, RAW));
+            Values.Add("art_1_category", new THint(11, RAW, false));
+            Values.Add("art_2_category", new THint(12, RAW, false));
+            Values.Add("art_3_category", new THint(13, RAW, false));
+            Values.Add("art_4_category", new THint(14, RAW, false));
+            Values.Add("art_5_category", new THint(15, RAW, false));
 
-            Values.Add("art_1_requirement", new THint(21, RAW));
-            Values.Add("art_2_requirement", new THint(22, RAW));
-            Values.Add("art_3_requirement", new THint(23, RAW));
-            Values.Add("art_4_requirement", new THint(24, RAW));
-            Values.Add("art_5_requirement", new THint(25, RAW));
+            Values.Add("art_1_requirement", new THint(21, RAW, false));
+            Values.Add("art_2_requirement", new THint(22, RAW, false));
+            Values.Add("art_3_requirement", new THint(23, RAW, false));
+            Values.Add("art_4_requirement", new THint(24, RAW, false));
+            Values.Add("art_5_requirement", new THint(25, RAW, false));
         }
     }
 
@@ -511,32 +512,32 @@ namespace th_hack_tools
         {
             RAW = data.contents[character_index].ToArray();
 
-            Values.Add("skill_personal", new THint(20, RAW));
-            Values.Add("skill_timeskip", new THint(21, RAW));
+            Values.Add("skill_personal", new THint(20, RAW, false));
+            Values.Add("skill_timeskip", new THint(21, RAW, false));
 
-            Values.Add("skill_3", new THint(22, RAW));
-            Values.Add("skill_4", new THint(23, RAW));
-            Values.Add("skill_5", new THint(24, RAW));
-            Values.Add("skill_6", new THint(25, RAW));
-            Values.Add("skill_7", new THint(26, RAW));
-            Values.Add("skill_8", new THint(27, RAW));
-            Values.Add("skill_9", new THint(28, RAW));
+            Values.Add("skill_3", new THint(22, RAW, false));
+            Values.Add("skill_4", new THint(23, RAW, false));
+            Values.Add("skill_5", new THint(24, RAW, false));
+            Values.Add("skill_6", new THint(25, RAW, false));
+            Values.Add("skill_7", new THint(26, RAW, false));
+            Values.Add("skill_8", new THint(27, RAW, false));
+            Values.Add("skill_9", new THint(28, RAW, false));
 
-            Values.Add("skill_category3", new THint(0, RAW));
-            Values.Add("skill_category4", new THint(1, RAW));
-            Values.Add("skill_category5", new THint(2, RAW));
-            Values.Add("skill_category6", new THint(3, RAW));
-            Values.Add("skill_category7", new THint(4, RAW));
-            Values.Add("skill_category8", new THint(5, RAW));
-            Values.Add("skill_category9", new THint(6, RAW));
+            Values.Add("skill_category3", new THint(0, RAW, false));
+            Values.Add("skill_category4", new THint(1, RAW, false));
+            Values.Add("skill_category5", new THint(2, RAW, false));
+            Values.Add("skill_category6", new THint(3, RAW, false));
+            Values.Add("skill_category7", new THint(4, RAW, false));
+            Values.Add("skill_category8", new THint(5, RAW, false));
+            Values.Add("skill_category9", new THint(6, RAW, false));
 
-            Values.Add("skill_requirement3", new THint(42, RAW));
-            Values.Add("skill_requirement4", new THint(43, RAW));
-            Values.Add("skill_requirement5", new THint(44, RAW));
-            Values.Add("skill_requirement6", new THint(45, RAW));
-            Values.Add("skill_requirement7", new THint(46, RAW));
-            Values.Add("skill_requirement8", new THint(47, RAW));
-            Values.Add("skill_requirement9", new THint(48, RAW));
+            Values.Add("skill_requirement3", new THint(42, RAW, false));
+            Values.Add("skill_requirement4", new THint(43, RAW, false));
+            Values.Add("skill_requirement5", new THint(44, RAW, false));
+            Values.Add("skill_requirement6", new THint(45, RAW, false));
+            Values.Add("skill_requirement7", new THint(46, RAW, false));
+            Values.Add("skill_requirement8", new THint(47, RAW, false));
+            Values.Add("skill_requirement9", new THint(48, RAW, false));
 
         }
 
@@ -549,17 +550,17 @@ namespace th_hack_tools
         {
             RAW = data.contents[character_index].ToArray();
 
-            Values.Add("spell_reason_1", new THint(5, RAW));
-            Values.Add("spell_reason_2", new THint(6, RAW));
-            Values.Add("spell_reason_3", new THint(7, RAW));
-            Values.Add("spell_reason_4", new THint(8, RAW));
-            Values.Add("spell_reason_5", new THint(9, RAW));
+            Values.Add("spell_reason_1", new THint(5, RAW, false));
+            Values.Add("spell_reason_2", new THint(6, RAW, false));
+            Values.Add("spell_reason_3", new THint(7, RAW, false));
+            Values.Add("spell_reason_4", new THint(8, RAW, false));
+            Values.Add("spell_reason_5", new THint(9, RAW, false));
 
-            Values.Add("spell_faith_1", new THint(10, RAW));
-            Values.Add("spell_faith_2", new THint(11, RAW));
-            Values.Add("spell_faith_3", new THint(12, RAW));
-            Values.Add("spell_faith_4", new THint(13, RAW));
-            Values.Add("spell_faith_5", new THint(14, RAW));
+            Values.Add("spell_faith_1", new THint(10, RAW, false));
+            Values.Add("spell_faith_2", new THint(11, RAW, false));
+            Values.Add("spell_faith_3", new THint(12, RAW, false));
+            Values.Add("spell_faith_4", new THint(13, RAW, false));
+            Values.Add("spell_faith_5", new THint(14, RAW, false));
 
         }
 
@@ -582,34 +583,34 @@ namespace th_hack_tools
             skills = new THSkillList(data.Tables[5], index);
             arts = new THCombatArtList(data.Tables[7], index);
 
-            Values.Add("age", new THint(27, RAW));
-            Values.Add("birth_day", new THint(29, RAW));
-            Values.Add("birth_month", new THint(30, RAW));
+            Values.Add("age", new THint(27, RAW, false));
+            Values.Add("birth_day", new THint(29, RAW, false));
+            Values.Add("birth_month", new THint(30, RAW, false));
 
-            Values.Add("height", new THint(44, RAW));
-            Values.Add("height_ts", new THint(45, RAW));
+            Values.Add("height", new THint(44, RAW, false));
+            Values.Add("height_ts", new THint(45, RAW, false));
 
-            Values.Add("base_hp", new THint(39, RAW));
-            Values.Add("base_str", new THint(48, RAW));
-            Values.Add("base_mag", new THint(49, RAW));
-            Values.Add("base_dex", new THint(50, RAW));
-            Values.Add("base_spd", new THint(51, RAW));
-            Values.Add("base_lck", new THint(52, RAW));
-            Values.Add("base_def", new THint(53, RAW));
-            Values.Add("base_res", new THint(54, RAW));
-            Values.Add("base_mov", new THint(55, RAW));
-            Values.Add("base_cha", new THint(56, RAW));
+            Values.Add("base_hp", new THint(39, RAW, false));
+            Values.Add("base_str", new THint(48, RAW, false));
+            Values.Add("base_mag", new THint(49, RAW, false));
+            Values.Add("base_dex", new THint(50, RAW, false));
+            Values.Add("base_spd", new THint(51, RAW, false));
+            Values.Add("base_lck", new THint(52, RAW, false));
+            Values.Add("base_def", new THint(53, RAW, false));
+            Values.Add("base_res", new THint(54, RAW, false));
+            Values.Add("base_mov", new THint(55, RAW, false));
+            Values.Add("base_cha", new THint(56, RAW, false));
 
-            Values.Add("max_hp", new THint(34, RAW));
-            Values.Add("max_str", new THint(66, RAW));
-            Values.Add("max_mag", new THint(67, RAW));
-            Values.Add("max_dex", new THint(68, RAW));
-            Values.Add("max_spd", new THint(69, RAW));
-            Values.Add("max_lck", new THint(70, RAW));
-            Values.Add("max_def", new THint(71, RAW));
-            Values.Add("max_res", new THint(72, RAW));
-            Values.Add("max_mov", new THint(73, RAW));
-            Values.Add("max_cha", new THint(74, RAW));
+            Values.Add("max_hp", new THint(34, RAW, false));
+            Values.Add("max_str", new THint(66, RAW, false));
+            Values.Add("max_mag", new THint(67, RAW, false));
+            Values.Add("max_dex", new THint(68, RAW, false));
+            Values.Add("max_spd", new THint(69, RAW, false));
+            Values.Add("max_lck", new THint(70, RAW, false));
+            Values.Add("max_def", new THint(71, RAW, false));
+            Values.Add("max_res", new THint(72, RAW, false));
+            Values.Add("max_mov", new THint(73, RAW, false));
+            Values.Add("max_cha", new THint(74, RAW, false));
 
             Values.Add("growth_hp", new THint(37, RAW));
             Values.Add("growth_str", new THint(57, RAW));
@@ -622,10 +623,10 @@ namespace th_hack_tools
             Values.Add("growth_mov", new THint(64, RAW));
             Values.Add("growth_cha", new THint(65, RAW));
 
-            Values.Add("crest_first", new THint(41, RAW));
-            Values.Add("crest_second", new THint(42, RAW));
+            Values.Add("crest_first", new THint(41, RAW, false));
+            Values.Add("crest_second", new THint(42, RAW, false));
 
-            Values.Add("character_class", new THint(28, RAW));
+            Values.Add("character_class", new THint(28, RAW, false));
 
         }
 

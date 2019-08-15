@@ -121,9 +121,6 @@
   <data name="Flayn_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Flayn_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Byleth_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Byleth_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Hubert_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hubert_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -228,5 +225,11 @@
   </data>
   <data name="Character" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Character.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Byleth (Female)_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Byleth (Female)_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Byleth (Male)_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Byleth (Male)_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
