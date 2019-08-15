@@ -44,13 +44,13 @@
             // Button_ClassEditor
             // 
             this.Button_ClassEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Button_ClassEditor.Enabled = false;
             this.Button_ClassEditor.Location = new System.Drawing.Point(3, 43);
             this.Button_ClassEditor.Name = "Button_ClassEditor";
             this.Button_ClassEditor.Size = new System.Drawing.Size(182, 34);
             this.Button_ClassEditor.TabIndex = 1;
             this.Button_ClassEditor.Text = "Class Editor";
             this.Button_ClassEditor.UseVisualStyleBackColor = true;
+            this.Button_ClassEditor.Click += new System.EventHandler(this.Button_ClassEditor_Click);
             // 
             // Button_ItemEditor
             // 
@@ -128,9 +128,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(16, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 0.1b";
+            this.label1.Text = "Version 0.2";
             // 
             // MainForm
             // 

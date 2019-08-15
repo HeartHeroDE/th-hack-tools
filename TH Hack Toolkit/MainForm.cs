@@ -92,5 +92,11 @@ namespace th_hack_tools
             Character_Editor editor = new Character_Editor();
             editor.ShowDialog();
         }
+
+        private void Button_ClassEditor_Click(object sender, EventArgs e)
+        {
+            Class_Editor editor = new Class_Editor();
+            editor.ShowDialog();
+        }
     }
 }

@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace th_hack_tools
 {
 
-    public partial class Character_Editor : Form
+    public partial class Character_Editor : THForm
     {
 
         public THCharacter current_character;
@@ -23,37 +23,6 @@ namespace th_hack_tools
         public Character_Editor()
         {
             InitializeComponent();
-        }
-
-        public static Bitmap GetImageByName(string imageName)
-        {
-            return (Bitmap)Properties.Resources.ResourceManager.GetObject(imageName);
-
-        }
-
-        private void ComboBoxSelect(ComboBox box, int value)
-        {
-            box.SelectedIndex = box.Items.Count - 1;
-            for (int i = 0; i < box.Items.Count; i++)
-            {
-                
-                if (HexItem(box.Items[i].ToString()) == value)
-                {
-                    box.SelectedIndex = i;
-                }
-                    
-            }
-        }
-
-        private int HexItem(string item)
-        {
-            string[] split = item.Split(' ');
-            return int.Parse(split[0].Substring(2), System.Globalization.NumberStyles.HexNumber);
-        }
-
-        private int ComboBoxHex(ComboBox box)
-        {
-            return HexItem(box.SelectedItem.ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -225,6 +194,8 @@ namespace th_hack_tools
             ComboBoxSelect(Box_CombatArt5_Requirement, current_character.arts.Values["art_5_requirement"].Value);
 
             ComboBoxSelect(Box_Classes, current_character.Values["character_class"].Value);
+
+            splitContainer1.Panel2.Enabled = true;
             reload = false;
 
         }

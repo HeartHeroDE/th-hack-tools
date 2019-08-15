@@ -26,6 +26,7 @@ namespace th_hack_tools
 
         private List<THCharacter> Character_data;
         private List<THClass> Class_data;
+        public THClassLevels ClassLevels;
 
         public th_data(string file)
         {
@@ -63,7 +64,7 @@ namespace th_hack_tools
             Items.Add(0xFF, "No Item");
 
             Class_data = new List<THClass>();
-            Classes = read_name_table(TextTable, 0x4A3FA, 0x4A852);
+            Classes = read_name_table(TextTable, 0x4A3FA, 0x4A853);
 
             initiate_data();
 
@@ -78,12 +79,13 @@ namespace th_hack_tools
                 Character_data.Add(new THCharacter(CharacterTable, i));
             }
 
-            /*
+            
             Class_data.Clear();
-            for (int i = 0; i < Characters.Count; i++)
+            for (int i = 0; i < Classes.Count; i++)
             {
                 Class_data.Add(new THClass(ClassTable, i));
-            }*/
+            }
+            ClassLevels = new THClassLevels(ClassTable.Tables[2]);
         }
 
         Dictionary<int, string> read_name_table(byte[] table, int offset, int end = 0)
@@ -125,6 +127,11 @@ namespace th_hack_tools
             return Character_data[index];
         }
 
+        public THClass get_class(int index)
+        {
+            return Class_data[index];
+        }
+
         public void Save(string file)
         {
             
@@ -136,8 +143,16 @@ namespace th_hack_tools
                 character.Write(ref CharacterTable);
             }
 
+            foreach (THClass current_class in Class_data)
+            {
+                current_class.Write(ref ClassTable);
+            }
+
+            ClassLevels.Write(ref ClassTable);
+
             CharacterTable.Write(file);
-            
+            ClassTable.Write(file);
+
         }
 
     }
@@ -207,6 +222,8 @@ namespace th_hack_tools
                 new_data.AddRange(new_table);
                 table_offset += new_table.Count;
             }
+
+            // Add contents to end of header and write using MemoryMapping for better performance
 
             new_header.AddRange(new_data);
 
@@ -280,10 +297,18 @@ namespace th_hack_tools
         private int Offset;
         public int Value;
 
-        public THint(int offset, byte[] data)
+        public THint(int offset, byte[] data, bool signed=true)
         {
             Offset = offset;
-            Value = data[offset];
+            if (signed)
+            {
+                Value = (sbyte)data[offset];
+            }
+            else
+            {
+                Value = (byte)data[offset];
+            }
+            
         }
 
         public void Save(ref byte[] data)
@@ -309,23 +334,148 @@ namespace th_hack_tools
 
     }
 
+    public class THClassLevels : THObject
+    {
+        public THClassLevels(Table data)
+        {
+            RAW = new byte[data.contents.Count];
+            for (int i=0;i<RAW.Length;i++)
+            {
+                RAW[i] = data.contents[i][0];
+            }
+            Values.Add("lv_beginner", new THint(1, RAW));
+            Values.Add("lv_intermediate", new THint(2, RAW));
+            Values.Add("lv_advanced", new THint(3, RAW));
+            Values.Add("lv_master", new THint(4, RAW));
+        }
+
+        public void Write(ref TableController controller)
+        {
+
+            Save();
+
+            for (int i = 0; i < RAW.Length; i++)
+            {
+                controller.Tables[2].contents[i][0] = RAW[i];
+            }
+
+        }
+
+    }
+
     public class THClass : THObject
     {
 
-        int index;
+        private int index;
 
-        public THClass(byte[] data, int class_index)
+        public THClassSkills skills;
+        public THClassRequirements requirements;
+
+        public THClass(TableController data, int class_index)
         {
 
-            RAW = new byte[108];
             index = class_index;
+            RAW = data.Tables[0].contents[index];
 
-            int offset = 0x94 + index * 108;
-            Array.Copy(data, offset, RAW, 0, 30);
+            skills = new THClassSkills(data.Tables[3], index);
+            requirements = new THClassRequirements(data.Tables[1], index);
 
-            //Values.Add("art_1", new THint(1, RAW));
+            Values.Add("growth_hp", new THint(30, RAW));
+            Values.Add("growth_str", new THint(21, RAW));
+            Values.Add("growth_mag", new THint(22, RAW));
+            Values.Add("growth_dex", new THint(23, RAW));
+            Values.Add("growth_spd", new THint(24, RAW));
+            Values.Add("growth_lck", new THint(25, RAW));
+            Values.Add("growth_def", new THint(26, RAW));
+            Values.Add("growth_res", new THint(27, RAW));
+            Values.Add("growth_mov", new THint(28, RAW));
+            Values.Add("growth_cha", new THint(29, RAW));
+
+            Values.Add("base_hp", new THint(76, RAW));
+            Values.Add("base_str", new THint(85, RAW));
+            Values.Add("base_mag", new THint(86, RAW));
+            Values.Add("base_dex", new THint(87, RAW));
+            Values.Add("base_spd", new THint(88, RAW));
+            Values.Add("base_lck", new THint(89, RAW));
+            Values.Add("base_def", new THint(90, RAW));
+            Values.Add("base_res", new THint(91, RAW));
+            Values.Add("base_mov", new THint(92, RAW));
+            Values.Add("base_cha", new THint(93, RAW));
+
+            Values.Add("exp_sword", new THint(57, RAW));
+            Values.Add("exp_lance", new THint(58, RAW));
+            Values.Add("exp_axe", new THint(59, RAW));
+            Values.Add("exp_bow", new THint(60, RAW));
+            Values.Add("exp_brawl", new THint(61, RAW));
+            Values.Add("exp_reason", new THint(62, RAW));
+            Values.Add("exp_faith", new THint(63, RAW));
+            Values.Add("exp_authority", new THint(64, RAW));
+            Values.Add("exp_armor", new THint(65, RAW));
+            Values.Add("exp_riding", new THint(66, RAW));
+            Values.Add("exp_flying", new THint(67, RAW));
+
+            Values.Add("exp_mastery", new THint(74, RAW,false));
 
         }
+
+        public void Write(ref TableController controller)
+        {
+
+            Save();
+            skills.Save();
+            requirements.Save();
+
+            // Write to Table Controller
+
+            controller.Tables[0].contents[index] = this.RAW;
+            controller.Tables[1].contents[index] = requirements.RAW;
+            controller.Tables[3].contents[index] = skills.RAW;
+
+        }
+
+    }
+
+    public class THClassSkills : THObject
+    {
+
+        public THClassSkills(Table data, int class_index)
+        {
+            RAW = data.contents[class_index].ToArray();
+
+            Values.Add("mastery_skill", new THint(0, RAW,false));
+            Values.Add("mastery_art", new THint(1, RAW, false));
+
+            Values.Add("class_skill_1", new THint(2, RAW, false));
+            Values.Add("class_skill_2", new THint(3, RAW, false));
+            Values.Add("class_skill_3", new THint(4, RAW, false));
+
+        }
+
+    }
+
+    public class THClassRequirements : THObject
+    {
+
+        public THClassRequirements(Table data, int class_index)
+        {
+            RAW = data.contents[class_index].ToArray();
+
+            Values.Add("genderlock", new THint(3, RAW, false));
+
+            Values.Add("req_sword", new THint(4, RAW, false));
+            Values.Add("req_lance", new THint(5, RAW, false));
+            Values.Add("req_axe", new THint(6, RAW, false));
+            Values.Add("req_bow", new THint(7, RAW, false));
+            Values.Add("req_brawl", new THint(8, RAW, false));
+            Values.Add("req_reason", new THint(9, RAW, false));
+            Values.Add("req_faith", new THint(10, RAW, false));
+            Values.Add("req_authority", new THint(11, RAW, false));
+            Values.Add("req_armor", new THint(12, RAW, false));
+            Values.Add("req_riding", new THint(13, RAW, false));
+            Values.Add("req_flying", new THint(14, RAW, false));
+
+        }
+
     }
 
     public class THCombatArtList : THObject

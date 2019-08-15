@@ -55,6 +55,18 @@
     <Compile Include="Character_Editor.Designer.cs">
       <DependentUpon>Character_Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Class_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class_Editor.Designer.cs">
+      <DependentUpon>Class_Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class_Editor_Levels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class_Editor_Levels.Designer.cs">
+      <DependentUpon>Class_Editor_Levels.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,9 +80,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="THForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="th_data.cs" />
     <EmbeddedResource Include="Character_Editor.resx">
       <DependentUpon>Character_Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Class_Editor.resx">
+      <DependentUpon>Class_Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Class_Editor_Levels.resx">
+      <DependentUpon>Class_Editor_Levels.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

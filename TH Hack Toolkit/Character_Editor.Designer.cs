@@ -89,10 +89,10 @@
             this.Box_BaseDEX = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.Box_BaseSPD = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Label_BaseDEF = new System.Windows.Forms.Label();
+            this.Label_BaseRES = new System.Windows.Forms.Label();
+            this.Label_BaseMOV = new System.Windows.Forms.Label();
+            this.Label_BaseCHA = new System.Windows.Forms.Label();
             this.Box_BaseDEF = new System.Windows.Forms.NumericUpDown();
             this.Box_BaseRES = new System.Windows.Forms.NumericUpDown();
             this.Box_BaseMOV = new System.Windows.Forms.NumericUpDown();
@@ -159,20 +159,6 @@
             this.label44 = new System.Windows.Forms.Label();
             this.Box_SkillPersonal = new System.Windows.Forms.ComboBox();
             this.label41 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Box_Classes = new System.Windows.Forms.ComboBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.Label_Birthday = new System.Windows.Forms.Label();
-            this.Box_Birthday = new System.Windows.Forms.NumericUpDown();
-            this.Box_Birthmonth = new System.Windows.Forms.NumericUpDown();
-            this.Box_Height_TS = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Box_Height = new System.Windows.Forms.NumericUpDown();
-            this.Label_Height = new System.Windows.Forms.Label();
-            this.Label_Age = new System.Windows.Forms.Label();
-            this.Box_Age = new System.Windows.Forms.NumericUpDown();
-            this.Text_Name = new System.Windows.Forms.TextBox();
-            this.Label_Name = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Box_CombatArt5_Requirement = new System.Windows.Forms.ComboBox();
             this.Box_CombatArt5_Category = new System.Windows.Forms.ComboBox();
@@ -194,6 +180,20 @@
             this.Box_CombatArt1_Category = new System.Windows.Forms.ComboBox();
             this.Box_CombatArt1 = new System.Windows.Forms.ComboBox();
             this.label56 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Box_Classes = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.Label_Birthday = new System.Windows.Forms.Label();
+            this.Box_Birthday = new System.Windows.Forms.NumericUpDown();
+            this.Box_Birthmonth = new System.Windows.Forms.NumericUpDown();
+            this.Box_Height_TS = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Box_Height = new System.Windows.Forms.NumericUpDown();
+            this.Label_Height = new System.Windows.Forms.Label();
+            this.Label_Age = new System.Windows.Forms.Label();
+            this.Box_Age = new System.Windows.Forms.NumericUpDown();
+            this.Text_Name = new System.Windows.Forms.TextBox();
+            this.Label_Name = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -238,6 +238,7 @@
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthday)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthmonth)).BeginInit();
@@ -245,7 +246,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Age)).BeginInit();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // List_Characters
@@ -278,6 +278,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
+            this.splitContainer1.Panel2.Enabled = false;
             this.splitContainer1.Size = new System.Drawing.Size(698, 538);
             this.splitContainer1.SplitterDistance = 174;
             this.splitContainer1.TabIndex = 1;
@@ -336,7 +337,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(496, 322);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Stats";
+            this.tabPage1.Text = "Stats and Growths";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -400,10 +401,10 @@
             this.tableLayoutPanel1.Controls.Add(this.Box_BaseDEX, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.Box_BaseSPD, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.Label_BaseDEF, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.Label_BaseRES, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.Label_BaseMOV, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.Label_BaseCHA, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.Box_BaseDEF, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.Box_BaseRES, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.Box_BaseMOV, 1, 8);
@@ -1049,49 +1050,49 @@
             this.Box_BaseSPD.TabIndex = 8;
             this.Box_BaseSPD.ValueChanged += new System.EventHandler(this.Box_BaseSPD_ValueChanged);
             // 
-            // label6
+            // Label_BaseDEF
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 168);
-            this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.label6.Size = new System.Drawing.Size(41, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "DEF";
+            this.Label_BaseDEF.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Label_BaseDEF.AutoSize = true;
+            this.Label_BaseDEF.Location = new System.Drawing.Point(13, 168);
+            this.Label_BaseDEF.Name = "Label_BaseDEF";
+            this.Label_BaseDEF.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Label_BaseDEF.Size = new System.Drawing.Size(41, 15);
+            this.Label_BaseDEF.TabIndex = 11;
+            this.Label_BaseDEF.Text = "DEF";
             // 
-            // label7
+            // Label_BaseRES
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 195);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.label7.Size = new System.Drawing.Size(42, 15);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "RES";
+            this.Label_BaseRES.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Label_BaseRES.AutoSize = true;
+            this.Label_BaseRES.Location = new System.Drawing.Point(13, 195);
+            this.Label_BaseRES.Name = "Label_BaseRES";
+            this.Label_BaseRES.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Label_BaseRES.Size = new System.Drawing.Size(42, 15);
+            this.Label_BaseRES.TabIndex = 13;
+            this.Label_BaseRES.Text = "RES";
             // 
-            // label8
+            // Label_BaseMOV
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 222);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.label8.Size = new System.Drawing.Size(44, 15);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "MOV";
+            this.Label_BaseMOV.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Label_BaseMOV.AutoSize = true;
+            this.Label_BaseMOV.Location = new System.Drawing.Point(13, 222);
+            this.Label_BaseMOV.Name = "Label_BaseMOV";
+            this.Label_BaseMOV.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Label_BaseMOV.Size = new System.Drawing.Size(44, 15);
+            this.Label_BaseMOV.TabIndex = 15;
+            this.Label_BaseMOV.Text = "MOV";
             // 
-            // label9
+            // Label_BaseCHA
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 249);
-            this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.label9.Size = new System.Drawing.Size(41, 15);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "CHA";
+            this.Label_BaseCHA.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Label_BaseCHA.AutoSize = true;
+            this.Label_BaseCHA.Location = new System.Drawing.Point(13, 249);
+            this.Label_BaseCHA.Name = "Label_BaseCHA";
+            this.Label_BaseCHA.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Label_BaseCHA.Size = new System.Drawing.Size(41, 15);
+            this.Label_BaseCHA.TabIndex = 17;
+            this.Label_BaseCHA.Text = "CHA";
             // 
             // Box_BaseDEF
             // 
@@ -2072,167 +2073,6 @@
             this.label41.TabIndex = 0;
             this.label41.Text = "Personal Skill";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.Box_Classes);
-            this.groupBox2.Controls.Add(this.label42);
-            this.groupBox2.Controls.Add(this.Label_Birthday);
-            this.groupBox2.Controls.Add(this.Box_Birthday);
-            this.groupBox2.Controls.Add(this.Box_Birthmonth);
-            this.groupBox2.Controls.Add(this.Box_Height_TS);
-            this.groupBox2.Controls.Add(this.pictureBox1);
-            this.groupBox2.Controls.Add(this.Box_Height);
-            this.groupBox2.Controls.Add(this.Label_Height);
-            this.groupBox2.Controls.Add(this.Label_Age);
-            this.groupBox2.Controls.Add(this.Box_Age);
-            this.groupBox2.Controls.Add(this.Text_Name);
-            this.groupBox2.Controls.Add(this.Label_Name);
-            this.groupBox2.Location = new System.Drawing.Point(13, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(500, 129);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Character Details";
-            // 
-            // Box_Classes
-            // 
-            this.Box_Classes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Box_Classes.FormattingEnabled = true;
-            this.Box_Classes.Location = new System.Drawing.Point(163, 58);
-            this.Box_Classes.Name = "Box_Classes";
-            this.Box_Classes.Size = new System.Drawing.Size(125, 21);
-            this.Box_Classes.TabIndex = 7;
-            this.Box_Classes.SelectedIndexChanged += new System.EventHandler(this.Box_Classes_SelectedIndexChanged);
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(122, 61);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(32, 13);
-            this.label42.TabIndex = 6;
-            this.label42.Text = "Class";
-            // 
-            // Label_Birthday
-            // 
-            this.Label_Birthday.AutoSize = true;
-            this.Label_Birthday.Location = new System.Drawing.Point(317, 61);
-            this.Label_Birthday.Name = "Label_Birthday";
-            this.Label_Birthday.Size = new System.Drawing.Size(45, 13);
-            this.Label_Birthday.TabIndex = 5;
-            this.Label_Birthday.Text = "Birthday";
-            // 
-            // Box_Birthday
-            // 
-            this.Box_Birthday.Location = new System.Drawing.Point(391, 59);
-            this.Box_Birthday.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.Box_Birthday.Name = "Box_Birthday";
-            this.Box_Birthday.Size = new System.Drawing.Size(40, 20);
-            this.Box_Birthday.TabIndex = 4;
-            this.Box_Birthday.ValueChanged += new System.EventHandler(this.Box_Birthday_ValueChanged);
-            // 
-            // Box_Birthmonth
-            // 
-            this.Box_Birthmonth.Location = new System.Drawing.Point(437, 59);
-            this.Box_Birthmonth.Maximum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.Box_Birthmonth.Name = "Box_Birthmonth";
-            this.Box_Birthmonth.Size = new System.Drawing.Size(40, 20);
-            this.Box_Birthmonth.TabIndex = 3;
-            this.Box_Birthmonth.ValueChanged += new System.EventHandler(this.Box_Birthmonth_ValueChanged);
-            // 
-            // Box_Height_TS
-            // 
-            this.Box_Height_TS.Location = new System.Drawing.Point(437, 26);
-            this.Box_Height_TS.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.Box_Height_TS.Name = "Box_Height_TS";
-            this.Box_Height_TS.Size = new System.Drawing.Size(40, 20);
-            this.Box_Height_TS.TabIndex = 3;
-            this.Box_Height_TS.ValueChanged += new System.EventHandler(this.Box_Height_TS_ValueChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // Box_Height
-            // 
-            this.Box_Height.Location = new System.Drawing.Point(391, 26);
-            this.Box_Height.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.Box_Height.Name = "Box_Height";
-            this.Box_Height.Size = new System.Drawing.Size(40, 20);
-            this.Box_Height.TabIndex = 2;
-            this.Box_Height.ValueChanged += new System.EventHandler(this.Box_Height_ValueChanged);
-            // 
-            // Label_Height
-            // 
-            this.Label_Height.AutoSize = true;
-            this.Label_Height.Location = new System.Drawing.Point(317, 28);
-            this.Label_Height.Name = "Label_Height";
-            this.Label_Height.Size = new System.Drawing.Size(38, 13);
-            this.Label_Height.TabIndex = 3;
-            this.Label_Height.Text = "Height";
-            // 
-            // Label_Age
-            // 
-            this.Label_Age.AutoSize = true;
-            this.Label_Age.Location = new System.Drawing.Point(318, 89);
-            this.Label_Age.Name = "Label_Age";
-            this.Label_Age.Size = new System.Drawing.Size(26, 13);
-            this.Label_Age.TabIndex = 2;
-            this.Label_Age.Text = "Age";
-            // 
-            // Box_Age
-            // 
-            this.Box_Age.Location = new System.Drawing.Point(391, 87);
-            this.Box_Age.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.Box_Age.Name = "Box_Age";
-            this.Box_Age.Size = new System.Drawing.Size(86, 20);
-            this.Box_Age.TabIndex = 2;
-            this.Box_Age.ValueChanged += new System.EventHandler(this.Box_Age_ValueChanged);
-            // 
-            // Text_Name
-            // 
-            this.Text_Name.Enabled = false;
-            this.Text_Name.Location = new System.Drawing.Point(163, 25);
-            this.Text_Name.Name = "Text_Name";
-            this.Text_Name.Size = new System.Drawing.Size(125, 20);
-            this.Text_Name.TabIndex = 1;
-            // 
-            // Label_Name
-            // 
-            this.Label_Name.AutoSize = true;
-            this.Label_Name.Location = new System.Drawing.Point(122, 28);
-            this.Label_Name.Name = "Label_Name";
-            this.Label_Name.Size = new System.Drawing.Size(35, 13);
-            this.Label_Name.TabIndex = 0;
-            this.Label_Name.Text = "Name";
-            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.Box_CombatArt5_Requirement);
@@ -2593,6 +2433,167 @@
             this.label56.TabIndex = 34;
             this.label56.Text = "Combat Art 1";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.Box_Classes);
+            this.groupBox2.Controls.Add(this.label42);
+            this.groupBox2.Controls.Add(this.Label_Birthday);
+            this.groupBox2.Controls.Add(this.Box_Birthday);
+            this.groupBox2.Controls.Add(this.Box_Birthmonth);
+            this.groupBox2.Controls.Add(this.Box_Height_TS);
+            this.groupBox2.Controls.Add(this.pictureBox1);
+            this.groupBox2.Controls.Add(this.Box_Height);
+            this.groupBox2.Controls.Add(this.Label_Height);
+            this.groupBox2.Controls.Add(this.Label_Age);
+            this.groupBox2.Controls.Add(this.Box_Age);
+            this.groupBox2.Controls.Add(this.Text_Name);
+            this.groupBox2.Controls.Add(this.Label_Name);
+            this.groupBox2.Location = new System.Drawing.Point(13, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(500, 129);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Character Details";
+            // 
+            // Box_Classes
+            // 
+            this.Box_Classes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_Classes.FormattingEnabled = true;
+            this.Box_Classes.Location = new System.Drawing.Point(163, 58);
+            this.Box_Classes.Name = "Box_Classes";
+            this.Box_Classes.Size = new System.Drawing.Size(125, 21);
+            this.Box_Classes.TabIndex = 7;
+            this.Box_Classes.SelectedIndexChanged += new System.EventHandler(this.Box_Classes_SelectedIndexChanged);
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(122, 61);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(32, 13);
+            this.label42.TabIndex = 6;
+            this.label42.Text = "Class";
+            // 
+            // Label_Birthday
+            // 
+            this.Label_Birthday.AutoSize = true;
+            this.Label_Birthday.Location = new System.Drawing.Point(317, 61);
+            this.Label_Birthday.Name = "Label_Birthday";
+            this.Label_Birthday.Size = new System.Drawing.Size(45, 13);
+            this.Label_Birthday.TabIndex = 5;
+            this.Label_Birthday.Text = "Birthday";
+            // 
+            // Box_Birthday
+            // 
+            this.Box_Birthday.Location = new System.Drawing.Point(391, 59);
+            this.Box_Birthday.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.Box_Birthday.Name = "Box_Birthday";
+            this.Box_Birthday.Size = new System.Drawing.Size(40, 20);
+            this.Box_Birthday.TabIndex = 4;
+            this.Box_Birthday.ValueChanged += new System.EventHandler(this.Box_Birthday_ValueChanged);
+            // 
+            // Box_Birthmonth
+            // 
+            this.Box_Birthmonth.Location = new System.Drawing.Point(437, 59);
+            this.Box_Birthmonth.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.Box_Birthmonth.Name = "Box_Birthmonth";
+            this.Box_Birthmonth.Size = new System.Drawing.Size(40, 20);
+            this.Box_Birthmonth.TabIndex = 3;
+            this.Box_Birthmonth.ValueChanged += new System.EventHandler(this.Box_Birthmonth_ValueChanged);
+            // 
+            // Box_Height_TS
+            // 
+            this.Box_Height_TS.Location = new System.Drawing.Point(437, 26);
+            this.Box_Height_TS.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.Box_Height_TS.Name = "Box_Height_TS";
+            this.Box_Height_TS.Size = new System.Drawing.Size(40, 20);
+            this.Box_Height_TS.TabIndex = 3;
+            this.Box_Height_TS.ValueChanged += new System.EventHandler(this.Box_Height_TS_ValueChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // Box_Height
+            // 
+            this.Box_Height.Location = new System.Drawing.Point(391, 26);
+            this.Box_Height.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.Box_Height.Name = "Box_Height";
+            this.Box_Height.Size = new System.Drawing.Size(40, 20);
+            this.Box_Height.TabIndex = 2;
+            this.Box_Height.ValueChanged += new System.EventHandler(this.Box_Height_ValueChanged);
+            // 
+            // Label_Height
+            // 
+            this.Label_Height.AutoSize = true;
+            this.Label_Height.Location = new System.Drawing.Point(317, 28);
+            this.Label_Height.Name = "Label_Height";
+            this.Label_Height.Size = new System.Drawing.Size(38, 13);
+            this.Label_Height.TabIndex = 3;
+            this.Label_Height.Text = "Height";
+            // 
+            // Label_Age
+            // 
+            this.Label_Age.AutoSize = true;
+            this.Label_Age.Location = new System.Drawing.Point(318, 89);
+            this.Label_Age.Name = "Label_Age";
+            this.Label_Age.Size = new System.Drawing.Size(26, 13);
+            this.Label_Age.TabIndex = 2;
+            this.Label_Age.Text = "Age";
+            // 
+            // Box_Age
+            // 
+            this.Box_Age.Location = new System.Drawing.Point(391, 87);
+            this.Box_Age.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.Box_Age.Name = "Box_Age";
+            this.Box_Age.Size = new System.Drawing.Size(86, 20);
+            this.Box_Age.TabIndex = 2;
+            this.Box_Age.ValueChanged += new System.EventHandler(this.Box_Age_ValueChanged);
+            // 
+            // Text_Name
+            // 
+            this.Text_Name.Enabled = false;
+            this.Text_Name.Location = new System.Drawing.Point(163, 25);
+            this.Text_Name.Name = "Text_Name";
+            this.Text_Name.Size = new System.Drawing.Size(125, 20);
+            this.Text_Name.TabIndex = 1;
+            // 
+            // Label_Name
+            // 
+            this.Label_Name.AutoSize = true;
+            this.Label_Name.Location = new System.Drawing.Point(122, 28);
+            this.Label_Name.Name = "Label_Name";
+            this.Label_Name.Size = new System.Drawing.Size(35, 13);
+            this.Label_Name.TabIndex = 0;
+            this.Label_Name.Text = "Name";
+            // 
             // Character_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2655,6 +2656,8 @@
             this.tableLayoutPanel3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthday)).EndInit();
@@ -2663,8 +2666,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Age)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2705,13 +2706,13 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown Box_MaxSTR;
         private System.Windows.Forms.NumericUpDown Box_MaxHP;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label Label_BaseCHA;
         private System.Windows.Forms.NumericUpDown Box_BaseCHA;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label Label_BaseMOV;
         private System.Windows.Forms.NumericUpDown Box_BaseMOV;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label Label_BaseRES;
         private System.Windows.Forms.NumericUpDown Box_BaseRES;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label Label_BaseDEF;
         private System.Windows.Forms.NumericUpDown Box_BaseDEF;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown Box_BaseSPD;
