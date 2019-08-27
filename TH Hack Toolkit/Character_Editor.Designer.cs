@@ -187,13 +187,15 @@
             this.Box_Birthday = new System.Windows.Forms.NumericUpDown();
             this.Box_Birthmonth = new System.Windows.Forms.NumericUpDown();
             this.Box_Height_TS = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Box_Height = new System.Windows.Forms.NumericUpDown();
             this.Label_Height = new System.Windows.Forms.Label();
             this.Label_Age = new System.Windows.Forms.Label();
             this.Box_Age = new System.Windows.Forms.NumericUpDown();
             this.Text_Name = new System.Windows.Forms.TextBox();
             this.Label_Name = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Box_Model = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -243,9 +245,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthday)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthmonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height_TS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Age)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // List_Characters
@@ -2437,6 +2439,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.Box_Model);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.Box_Classes);
             this.groupBox2.Controls.Add(this.label42);
             this.groupBox2.Controls.Add(this.Label_Birthday);
@@ -2461,16 +2465,16 @@
             // 
             this.Box_Classes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Box_Classes.FormattingEnabled = true;
-            this.Box_Classes.Location = new System.Drawing.Point(163, 58);
+            this.Box_Classes.Location = new System.Drawing.Point(167, 58);
             this.Box_Classes.Name = "Box_Classes";
-            this.Box_Classes.Size = new System.Drawing.Size(125, 21);
+            this.Box_Classes.Size = new System.Drawing.Size(121, 21);
             this.Box_Classes.TabIndex = 7;
             this.Box_Classes.SelectedIndexChanged += new System.EventHandler(this.Box_Classes_SelectedIndexChanged);
             // 
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(122, 61);
+            this.label42.Location = new System.Drawing.Point(116, 61);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(32, 13);
             this.label42.TabIndex = 6;
@@ -2524,15 +2528,6 @@
             this.Box_Height_TS.TabIndex = 3;
             this.Box_Height_TS.ValueChanged += new System.EventHandler(this.Box_Height_TS_ValueChanged);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // Box_Height
             // 
             this.Box_Height.Location = new System.Drawing.Point(391, 26);
@@ -2558,7 +2553,7 @@
             // Label_Age
             // 
             this.Label_Age.AutoSize = true;
-            this.Label_Age.Location = new System.Drawing.Point(318, 89);
+            this.Label_Age.Location = new System.Drawing.Point(317, 89);
             this.Label_Age.Name = "Label_Age";
             this.Label_Age.Size = new System.Drawing.Size(26, 13);
             this.Label_Age.TabIndex = 2;
@@ -2580,19 +2575,47 @@
             // Text_Name
             // 
             this.Text_Name.Enabled = false;
-            this.Text_Name.Location = new System.Drawing.Point(163, 25);
+            this.Text_Name.Location = new System.Drawing.Point(167, 25);
             this.Text_Name.Name = "Text_Name";
-            this.Text_Name.Size = new System.Drawing.Size(125, 20);
+            this.Text_Name.Size = new System.Drawing.Size(121, 20);
             this.Text_Name.TabIndex = 1;
             // 
             // Label_Name
             // 
             this.Label_Name.AutoSize = true;
-            this.Label_Name.Location = new System.Drawing.Point(122, 28);
+            this.Label_Name.Location = new System.Drawing.Point(115, 28);
             this.Label_Name.Name = "Label_Name";
             this.Label_Name.Size = new System.Drawing.Size(35, 13);
             this.Label_Name.TabIndex = 0;
             this.Label_Name.Text = "Name";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(115, 91);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Model";
+            // 
+            // Box_Model
+            // 
+            this.Box_Model.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Box_Model.FormattingEnabled = true;
+            this.Box_Model.Location = new System.Drawing.Point(167, 88);
+            this.Box_Model.Name = "Box_Model";
+            this.Box_Model.Size = new System.Drawing.Size(121, 21);
+            this.Box_Model.TabIndex = 9;
+            this.Box_Model.SelectedIndexChanged += new System.EventHandler(this.Box_Model_SelectedIndexChanged);
             // 
             // Character_Editor
             // 
@@ -2663,9 +2686,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthday)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Birthmonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height_TS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Height)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Box_Age)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2837,6 +2860,8 @@
         private System.Windows.Forms.ComboBox Box_CombatArt1_Category;
         private System.Windows.Forms.ComboBox Box_CombatArt1;
         private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.ComboBox Box_Model;
+        private System.Windows.Forms.Label label6;
     }
 }
 
