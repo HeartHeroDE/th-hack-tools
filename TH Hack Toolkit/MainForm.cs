@@ -22,6 +22,8 @@ namespace th_hack_tools
         private void Button_OpenFile_Click(object sender, EventArgs e)
         {
             UseWaitCursor = true;
+            Update();
+
             if (current_file == null)
             {
                 OpenFileDialog FileDialog = new OpenFileDialog
@@ -40,19 +42,19 @@ namespace th_hack_tools
 
                 if (FileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    try
-                    {
+                    //try
+                    //{
                         Program.THData = new th_data(FileDialog.FileName);
                         current_file = FileDialog.FileName;
 
                         Text = current_file + " - " + "TH Hacking Toolkit";
                         Button_OpenFile.Text = "Save File";
                         Group_Editors.Enabled = true;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("This program only opens Data1.bin/Linkdata.bin files.", "File opening error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //}
+                    //catch
+                    //{
+                    //    MessageBox.Show("This program only opens Data1.bin/Linkdata.bin files.", "File opening error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //}
                 }
             }
             else
@@ -75,7 +77,7 @@ namespace th_hack_tools
                     Program.THData.Save(current_file);
 
                     MessageBox.Show("Your changes have been saved.", "File saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    Program.THData = new th_data(current_file);
                 }
             }
             UseWaitCursor = false;

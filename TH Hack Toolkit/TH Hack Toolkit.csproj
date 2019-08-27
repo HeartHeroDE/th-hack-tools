@@ -83,7 +83,8 @@
     <Compile Include="THForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="th_data.cs" />
+    <Compile Include="tools\th_data.cs" />
+    <Compile Include="tools\th_tables.cs" />
     <EmbeddedResource Include="Character_Editor.resx">
       <DependentUpon>Character_Editor.cs</DependentUpon>
     </EmbeddedResource>
