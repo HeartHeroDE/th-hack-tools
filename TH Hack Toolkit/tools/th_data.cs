@@ -10,64 +10,41 @@ namespace th_hack_tools
 {
     public class th_data
     {
-        private byte[] TextTable;
         private TableController CharacterTable;
         private TableController ClassTable;
+        private TableController StringTable;
+        private TextTable texts;
 
         FileStream fs;
-
-        public Dictionary<int, string> Characters;
-        public Dictionary<int, string> Classes;
-        public Dictionary<int, string> Crests;
-        public Dictionary<int, string> Spells;
-        public Dictionary<int, string> Skills;
-        public Dictionary<int, string> Arts;
-        public Dictionary<int, string> Items;
 
         private List<THCharacter> Character_data;
         private List<THClass> Class_data;
         public THClassLevels ClassLevels;
 
+        int string_table_end = 0;      // Offset for chunks after string table
+        int chunks_between = 0x8AFBD4; // Chunks between text and class data
+        int edit_size = 0;             // Total area of bytes that is editable starting from top
+
+        /// <summary>
+        /// Loads Three Houses Data with support for expansions
+        /// </summary>
+        /// <param name="file">Path to Data1.bin</param>
         public th_data(string file)
         {
-            // Read the file into <bits>
+            int relative_offset = 0;
+
             fs = new FileStream(file, FileMode.Open);
-            TextTable = read_seek(0, 0x83580C);
-            CharacterTable = new TableController(fs, 0x10EA800);
-            ClassTable = new TableController(fs, 0x10E53E0);
+            StringTable = new TableController(fs, relative_offset);
+
+            string_table_end = StringTable.total_length;
+            relative_offset += string_table_end + chunks_between;
+            ClassTable = new TableController(fs, relative_offset);
+
+            relative_offset += ClassTable.total_length;
+            CharacterTable = new TableController(fs, relative_offset);
+            edit_size = relative_offset + CharacterTable.total_length;
+
             fs.Close();
-
-            // Check if file is valid
-            /*byte[] Data1Signature = new byte[10] { 18, 0, 0, 0, 148, 0, 0, 0, 164, 58 };
-            if (string.Join("", CharacterTable.Take(10)) != string.Join("", Data1Signature))
-            {
-                throw new ArgumentException("Invalid file", "th_data");
-            }*/
-
-            // Get data from text tables
-            Character_data = new List<THCharacter>();
-            Characters = read_name_table(TextTable, 0x47CF7);
-            Characters[0] = "Byleth (Male)";
-            Characters[1] = "Byleth (Female)";
-
-            Crests = read_name_table(TextTable, 0x1178A6, 0x117C5D);
-            Crests.Add(0xFF, "No Crest");
-
-            Spells = read_name_table(TextTable, 0x111B7B, 0x111CBB);
-            Spells.Add(0xFF, "No Spell");
-
-            Skills = read_name_table(TextTable, 0x10DB28, 0x10E856);
-            Skills.Add(0xFF, "No Skill");
-
-            Arts = read_name_table(TextTable, 0x10B759, 0x10BB0A);
-            Arts.Add(0xFF, "No Art");
-
-            Items = read_name_table(TextTable, 0xFFC3E, 0x100829);
-            Items.Add(0xFF, "No Item");
-
-            Class_data = new List<THClass>();
-            Classes = read_name_table(TextTable, 0x4A3FA, 0x4A853);
-
             initiate_data();
 
             Console.WriteLine("Initiated TH Data.");
@@ -75,40 +52,32 @@ namespace th_hack_tools
 
         public void initiate_data()
         {
-            Character_data.Clear();
-            for (int i = 0; i < Characters.Count; i++)
+            texts = (TextTable)StringTable.Tables[1];
+
+            Character_data = new List<THCharacter>();
+            for (int i = 0; i < get_character_strings().Count; i++)
             {
                 Character_data.Add(new THCharacter(CharacterTable, i));
             }
 
-            
-            Class_data.Clear();
-            for (int i = 0; i < Classes.Count; i++)
+
+            Class_data = new List<THClass>();
+            for (int i = 0; i < get_class_strings().Count; i++)
             {
                 Class_data.Add(new THClass(ClassTable, i));
             }
             ClassLevels = new THClassLevels(ClassTable.Tables[2]);
         }
 
-        Dictionary<int, string> read_name_table(byte[] table, int offset, int end = 0)
+        Dictionary<int, string> read_name_table(Text_Archive archive, int start = 0, int items = 1)
         {
             Dictionary<int, string> NameTable = new Dictionary<int, string>();
-            List<byte> current_name = new List<byte>();
-            int i = 0;
 
-            while (!(table[offset] == 0 && table[offset - 1] == 0) && offset != end)
+            int index = 0;
+            for (int i=start; i < start + items; i++)
             {
-                if (table[offset] == 0)
-                {
-                    NameTable.Add(i, Encoding.UTF8.GetString(current_name.ToArray()));
-                    current_name.Clear();
-                    i++;
-                }
-                else
-                {
-                    current_name.Add(table[offset]);
-                }
-                offset++;
+                NameTable.Add(index, archive.contents[i]);
+                index++;
             }
 
             return NameTable;
@@ -133,11 +102,58 @@ namespace th_hack_tools
             return Class_data[index];
         }
 
+        public Dictionary<int, string> get_character_strings()
+        {
+            Dictionary<int, string> Characters = read_name_table(texts.archives[2], 1156, 37);
+            Characters[0] = Characters[0] + " (Male)";
+            Characters[1] = Characters[1] + " (Female)";
+            return Characters;
+        }
+
+        public Dictionary<int, string> get_class_strings()
+        {
+            return read_name_table(texts.archives[2], 3452, 90);
+        }
+
+        public Dictionary<int, string> get_crest_strings()
+        {
+            Dictionary<int, string> Crests = read_name_table(texts.archives[2], 9556, 48);
+            Crests.Add(0xFF, "No Crest");
+            return Crests;
+        }
+
+        public Dictionary<int, string> get_spell_strings()
+        {
+            Dictionary<int, string> Spells = read_name_table(texts.archives[2], 7802, 38);
+            Spells.Add(0xFF, "No Spell");
+            return Spells;
+        }
+        public Dictionary<int, string> get_skill_strings()
+        {
+            Dictionary<int, string> Skills = read_name_table(texts.archives[2], 7202, 238);
+            Skills.Add(0xFF, "No Skill");
+            return Skills;
+        }
+
+        public Dictionary<int, string> get_art_strings()
+        {
+            Dictionary<int, string> Arts = read_name_table(texts.archives[2], 5980, 77);
+            Arts.Add(0xFF, "No Art");
+            return Arts;
+        }
+
+        public Dictionary<int, string> get_item_strings()
+        {
+            Dictionary<int, string> Items = read_name_table(texts.archives[2], 4622, 26);
+            Items.Add(0xFF, "No Item");
+            return Items;
+        }
+
         public void Save(string file)
         {
-            
-            if (file != fs.Name)
-                File.Copy(fs.Name, file, true);
+
+            fs = new FileStream(fs.Name, FileMode.Open);
+            byte[] chunks = read_seek(string_table_end, chunks_between);
 
             foreach (THCharacter character in Character_data)
             {
@@ -149,146 +165,43 @@ namespace th_hack_tools
                 current_class.Write(ref ClassTable);
             }
 
-            ClassLevels.Write(ref ClassTable);
+            // Writing files in correct order
 
-            CharacterTable.Write(file);
-            ClassTable.Write(file);
-
-        }
-
-    }
-
-    /// <summary>
-    /// Loads an entire binary table and reads/writes all subtables.
-    /// TODO: Add support for TEXT-Tables
-    /// </summary>
-    public class TableController
-    {
-
-        public Table[] Tables;
-        int offset;
-
-        public TableController(FileStream stream, int _offset)
-        {
-            offset = _offset;
-            byte[] bits = new byte[4];
-            stream.Seek(offset, SeekOrigin.Begin);
-            stream.Read(bits, 0, 4);
-
-            Tables = new Table[BitConverter.ToInt32(bits,0)];
-
-            for (int i=0;i<Tables.Length;i++)
+            using (FileStream writer = new FileStream(file, FileMode.Create, FileAccess.Write))
             {
-                byte[] table;
-                byte[] table_offset = new byte[4];
-                byte[] table_length = new byte[4];
+                List<byte> strings = StringTable.Write(file);
+                writer.Write(strings.ToArray(), 0, strings.Count);
 
-                stream.Seek(offset + 4 + i*8, SeekOrigin.Begin);
-                stream.Read(table_offset, 0, 4);
-                stream.Read(table_length, 0, 4);
+                writer.Write(chunks, 0, chunks_between);
 
-                table = new byte[BitConverter.ToInt32(table_length, 0)];
+                ClassLevels.Write(ref ClassTable);
 
-                stream.Seek(offset + BitConverter.ToInt32(table_offset, 0), SeekOrigin.Begin);
-                stream.Read(table, 0, table.Length);
+                List<byte> classes = ClassTable.Write(file);
+                writer.Write(classes.ToArray(), 0, classes.Count);
 
-                Tables[i] = new Table(table);
+                List<byte> characters = CharacterTable.Write(file);
+                writer.Write(characters.ToArray(), 0, characters.Count);
 
-            }
 
-        }
+                // Begin appending old, unedited data to new file
+                fs.Seek(edit_size, SeekOrigin.Begin);
 
-        public void Write(string file)
-        {
-            List<byte> new_header = new List<byte>();
-            List<byte> new_data = new List<byte>();
+                // create a buffer to hold the bytes 
+                byte[] buffer = new Byte[1024];
+                int bytesRead;
 
-            int test = Tables.Length;
-
-            new_header.AddRange(BitConverter.GetBytes(Tables.Length));
-
-            int table_offset = 4 + Tables.Length * 8;
-            foreach (Table table in Tables)
-            {
-                List<byte> new_table = table.Save();
-
-                new_header.AddRange(BitConverter.GetBytes(table_offset));
-                new_header.AddRange(BitConverter.GetBytes(new_table.Count));
-
-                while (new_table.Count % 4 != 0)
+                // while the read method returns bytes
+                // keep writing them to the output stream
+                while ((bytesRead =
+                        fs.Read(buffer, 0, 1024)) > 0)
                 {
-                    new_table.Add((byte)0);
+                    writer.Write(buffer, 0, bytesRead);
                 }
 
-                new_data.AddRange(new_table);
-                table_offset += new_table.Count;
+                writer.Close();
             }
 
-            // Add contents to end of header and write using MemoryMapping for better performance
-
-            new_header.AddRange(new_data);
-
-            using (var mmf = MemoryMappedFile.CreateFromFile(file, FileMode.Open, "table_"+offset))
-            {
-                using (var accessor = mmf.CreateViewAccessor(offset, new_header.Count))
-                {
-
-                    // Make changes to the view.
-                    for (int i = 0; i < new_header.Count; i++)
-                    {
-                        accessor.Write(i, new_header[i]);
-                    }
-                }
-            }
-
-            Console.Write("Wrote Table Controller.");
-        }
-
-    }
-
-    /// <summary>
-    /// Reads/Writes binay subtables.
-    /// </summary>
-    public class Table
-    {
-        byte[] header = new byte[64];
-        public List<byte[]> contents = new List<byte[]>();
-
-        int unknown;
-        int item_count;
-        int item_length;
-
-        public Table(byte[] data)
-        {
-            Array.Copy(data, 0, header, 0, header.Length);
-            unknown = BitConverter.ToInt32(header, 0);
-            item_count = BitConverter.ToInt32(header,4);
-            item_length = BitConverter.ToInt32(header, 8);
-
-            for(int i=0;i<item_count;i++)
-            {
-                byte[] item = new byte[item_length];
-                int index = header.Length + item_length * i;
-                Array.Copy(data, index, item, 0, item.Length);
-                contents.Add(item);
-            }
-        }
-
-        public List<byte> Save()
-        {
-            item_count = contents.Count;
-            byte[] item_count_raw = BitConverter.GetBytes(item_count);
-            Array.Copy(item_count_raw, 0, header, 4, 4);
-
-            List<byte> new_table = new List<byte>();
-            new_table.AddRange(header);
-
-            foreach (byte[] item in contents)
-            {
-                new_table.AddRange(item);
-            }
-
-            return new_table;
+            fs.Close();
         }
 
     }
@@ -337,7 +250,7 @@ namespace th_hack_tools
 
     public class THClassLevels : THObject
     {
-        public THClassLevels(Table data)
+        public THClassLevels(ITable data)
         {
             RAW = new byte[data.contents.Count];
             for (int i=0;i<RAW.Length;i++)
@@ -367,7 +280,7 @@ namespace th_hack_tools
     public class THClass : THObject
     {
 
-        private int index;
+        public int index;
 
         public THClassSkills skills;
         public THClassRequirements requirements;
@@ -439,7 +352,7 @@ namespace th_hack_tools
     public class THClassSkills : THObject
     {
 
-        public THClassSkills(Table data, int class_index)
+        public THClassSkills(ITable data, int class_index)
         {
             RAW = data.contents[class_index].ToArray();
 
@@ -457,7 +370,7 @@ namespace th_hack_tools
     public class THClassRequirements : THObject
     {
 
-        public THClassRequirements(Table data, int class_index)
+        public THClassRequirements(ITable data, int class_index)
         {
             RAW = data.contents[class_index].ToArray();
 
@@ -481,7 +394,7 @@ namespace th_hack_tools
 
     public class THCombatArtList : THObject
     {
-        public THCombatArtList(Table data, int character_index)
+        public THCombatArtList(ITable data, int character_index)
         {
             RAW = data.contents[character_index].ToArray();
 
@@ -508,7 +421,7 @@ namespace th_hack_tools
     public class THSkillList : THObject
     {
 
-        public THSkillList(Table data, int character_index)
+        public THSkillList(ITable data, int character_index)
         {
             RAW = data.contents[character_index].ToArray();
 
@@ -546,7 +459,7 @@ namespace th_hack_tools
     public class THSpellList : THObject
     {
 
-        public THSpellList(Table data, int character_index)
+        public THSpellList(ITable data, int character_index)
         {
             RAW = data.contents[character_index].ToArray();
 
@@ -582,6 +495,8 @@ namespace th_hack_tools
             spells = new THSpellList(data.Tables[4], index);
             skills = new THSkillList(data.Tables[5], index);
             arts = new THCombatArtList(data.Tables[7], index);
+
+            Values.Add("3d_model", new THint(24, RAW, false));
 
             Values.Add("age", new THint(27, RAW, false));
             Values.Add("birth_day", new THint(29, RAW, false));
