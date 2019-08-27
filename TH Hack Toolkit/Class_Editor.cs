@@ -23,22 +23,22 @@ namespace th_hack_tools
 
         private void Class_Editor_Load(object sender, EventArgs e)
         {
-            foreach (int current_class in Program.THData.Classes.Keys)
+            foreach (int current_class in Program.THData.get_class_strings().Keys)
             {
-                List_Classes.Items.Add("0x" + current_class.ToString("X2") + " " + Program.THData.Classes[current_class]);
+                List_Classes.Items.Add("0x" + current_class.ToString("X2") + " " + Program.THData.get_class_strings()[current_class]);
             }
 
-            foreach (int skill in Program.THData.Skills.Keys)
+            foreach (int skill in Program.THData.get_skill_strings().Keys)
             {
-                Box_Skill_Mastery.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.Skills[skill]);
-                Box_Skill_1.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.Skills[skill]);
-                Box_Skill_2.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.Skills[skill]);
-                Box_Skill_3.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.Skills[skill]);
+                Box_Skill_Mastery.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
+                Box_Skill_1.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
+                Box_Skill_2.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
+                Box_Skill_3.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
             }
 
-            foreach (int art in Program.THData.Arts.Keys)
+            foreach (int art in Program.THData.get_art_strings().Keys)
             {
-                Box_Art_Mastery.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.Arts[art]);
+                Box_Art_Mastery.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
             }
 
         }
