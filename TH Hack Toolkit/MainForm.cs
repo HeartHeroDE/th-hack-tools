@@ -108,14 +108,18 @@ namespace th_hack_tools
 
         private void Button_ClassEditor_Click(object sender, EventArgs e)
         {
-            Class_Editor editor = new Class_Editor();
-            editor.ShowDialog();
+            using (Class_Editor editor = new Class_Editor())
+            {
+                editor.ShowDialog();
+            }
         }
 
         private void Button_ItemEditor_Click(object sender, EventArgs e)
         {
-            editors.Text_Editor editor = new editors.Text_Editor();
-            editor.ShowDialog();
+            using (editors.Text_Editor editor = new editors.Text_Editor())
+            {
+                editor.ShowDialog();
+            }
         }
     }
 }

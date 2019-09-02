@@ -234,30 +234,18 @@ namespace th_hack_tools
             return archives[archive].type;
         }
 
-        public int get_args1(int archive, int string_index)
+        public int get_args(int archive, int string_index, int arg)
         {
             if (get_type(archive) == 2)
-                return archives[archive].args1[string_index];
+                return archives[archive].get_pointer_args(string_index,arg);
             else
                 return -1;
         }
 
-        public int get_args2(int archive, int string_index)
+        public void set_args(int archive, int index, int value, int arg)
         {
-            if (get_type(archive) == 2)
-                return archives[archive].args2[string_index];
-            else
-                return -1;
-        }
-
-        public void set_arg1(int archive, int arg, int index)
-        {
-            archives[archive].args1[index] = arg;
-        }
-
-        public void set_arg2(int archive, int arg, int index)
-        {
-            archives[archive].args2[index] = arg;
+            if (archives[archive].type == 2)
+                archives[archive].set_pointer_args(index, value, arg);
         }
 
         public List<string> get_contents(int archive)
@@ -330,40 +318,27 @@ namespace th_hack_tools
     {
         
         byte[] header;
-        public List<uint> pointers = new List<uint>();
+        public List<byte[]> pointers = new List<byte[]>();
         public short type = 1;
-
-        public List<int> args1 = new List<int>(); // only if type=2
-        public List<int> args2 = new List<int>(); // only if type=2
 
         public Text_Archive(byte[] bin)
         {
-            int header_size = BitConverter.ToInt16(bin, 12);
-            int pointer_size = BitConverter.ToInt16(bin, 10);
+            ushort header_size = BitConverter.ToUInt16(bin, 12);
+            ushort pointer_size = BitConverter.ToUInt16(bin, 10);
 
             if (header_size >= 24)
                 type = 2;
 
             header = bin.Take(header_size).ToArray();
 
-            int pointer_count = BitConverter.ToInt16(header, 8);
+            ushort pointer_count = BitConverter.ToUInt16(header, 8);
             int pointer_end = pointer_count * pointer_size + header.Length;
 
             for (int i = header.Length; i < pointer_end; i += pointer_size)
             {
-                uint pointer = BitConverter.ToUInt32(bin, i);
+                byte[] pointer = new byte[pointer_size];
+                Array.Copy(bin,i,pointer,0,pointer_size);
                 pointers.Add(pointer);
-
-                if (type == 2)
-                {
-                    int character = BitConverter.ToInt32(bin, i+4);
-                    args1.Add(character);
-
-                    int voice = BitConverter.ToInt32(bin, i + 8);
-                    args2.Add(voice);
-
-                }
-
             }
 
         }
@@ -371,9 +346,9 @@ namespace th_hack_tools
         public List<string> load_contents(byte[] bin)
         {
             List<string> strings = new List<string>();
-            foreach (uint pointer in pointers)
+            foreach (byte[] pointer in pointers)
             {
-                uint i = pointer + (uint)header.Length;
+                uint i = BitConverter.ToUInt32(pointer,0) + (uint)header.Length;
                 List<byte> current_string = new List<byte>();
                 while (i < bin.Length)
                 {
@@ -388,13 +363,22 @@ namespace th_hack_tools
             return strings;
         }
 
+        public int get_pointer_args(int index, int arg)
+        {
+            return BitConverter.ToInt32(pointers[index], arg*4);
+        }
+
+        public void set_pointer_args(int index, int value, int arg)
+        {
+            Array.Copy(BitConverter.GetBytes(value), 0, pointers[index], arg * 4, 4);
+        }
+
         public byte[] Write(List<string> contents)
         {
             List<uint> new_pointers = new List<uint>();
             List<byte> new_contents = new List<byte>();
-            List<byte> pointers_raw = new List<byte>();
 
-            int pointer_size = BitConverter.ToInt16(header, 10);
+            ushort pointer_size = BitConverter.ToUInt16(header, 10);
 
             int pos = contents.Count * pointer_size;
             foreach (string s in contents)
@@ -410,41 +394,34 @@ namespace th_hack_tools
             byte[] new_header = header;
 
             ushort pointer_count = (ushort)new_pointers.Count;
-            int pointer_end = pointer_count * pointer_size + header.Length;
+            ushort pointer_end = (ushort)(pointer_count * pointer_size + header.Length);
 
             Array.Copy(BitConverter.GetBytes(pointer_count), 0, new_header, 8, 2);
 
-            foreach (int pointer in new_pointers)
+            List<byte> newbin = new_header.ToList();
+
+            for (int i=0; i < pointer_count; i++)
             {
-                pointers_raw.AddRange(BitConverter.GetBytes(pointer));
+                Array.Copy(BitConverter.GetBytes(new_pointers[i]), 0, pointers[i], 0, 4);
+                newbin.AddRange(pointers[i]);
             }
 
-            byte[] newbin = new_header.Concat(pointers_raw).Concat(new_contents).ToArray();
+            newbin.AddRange(new_contents);
 
-            int total_length = newbin.Length;
+            int total_length = newbin.Count;
 
             while (total_length > ushort.MaxValue)
             {
                 total_length -= ushort.MaxValue + 1;
             }
 
-            Array.Copy(BitConverter.GetBytes((ushort)total_length), 0, newbin, 4, 2);
+            byte[] newbin_array = newbin.ToArray();
 
-            if (type == 2)
-            {
-                int current = 0;
-                for (int i = new_header.Length; i < pointer_end; i += pointer_size)
-                {
-                    Array.Copy(BitConverter.GetBytes(args1[current]), 0, newbin, i + 4, 4);
-                    Array.Copy(BitConverter.GetBytes(args2[current]), 0, newbin, i + 8, 4);
-                    current++;
-                }
-            }
+            Array.Copy(BitConverter.GetBytes((ushort)total_length), 0, newbin_array, 4, 2);
+            
+            header = newbin_array.Take(header.Length).ToArray();
 
-            header = newbin.Take(header.Length).ToArray();
-            pointers = new_pointers;
-
-            return newbin;
+            return newbin_array;
         }
 
     }

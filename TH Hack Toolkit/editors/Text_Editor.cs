@@ -317,7 +317,7 @@ namespace th_hack_tools.editors
 
             foreach(ListViewItem item in List_Strings.Items)
             {
-                new_contents.Add(item.SubItems[0].Text);
+                new_contents.Add(item.SubItems[1].Text);
             }
 
             TextTable text_table = (TextTable)current_controller.Tables[current_table];
@@ -343,8 +343,8 @@ namespace th_hack_tools.editors
                     archive_box = new Text_Edit_ArchiveT1(active_string);
                 }
                 else {
-                    int character = text_table.get_args1(current_archive, index);
-                    int voice = text_table.get_args2(current_archive, index);
+                    int character = text_table.get_args(current_archive, index,1);
+                    int voice = text_table.get_args(current_archive, index,2);
                     archive_box = new Text_Edit_ArchiveT2(active_string,character,voice);
                 }
 
@@ -358,8 +358,8 @@ namespace th_hack_tools.editors
                         archive_strings[index] = data.ArchiveText;
 
                         text_table.set_contents(current_archive, archive_strings);
-                        text_table.set_arg1(current_archive, data.ArchiveArg1, index);
-                        text_table.set_arg2(current_archive, data.ArchiveArg1, index);
+                        text_table.set_args(current_archive, index, data.ArchiveArg1, 1);
+                        text_table.set_args(current_archive, index, data.ArchiveArg2, 2);
 
                         current_controller.Tables[current_table] = text_table;
                         item.SubItems[1].Text = data.ArchiveText;

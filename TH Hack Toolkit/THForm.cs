@@ -65,7 +65,7 @@ namespace th_hack_tools
             string new_string = Encoding.UTF8.GetString(utf);
 
             new_string = new_string.Replace("\r\n", "\n");
-            new_string = new Regex("<C([0-9])>(.*?)<\\/C[0-9]>").Replace(new_string, "\x001bC$1$C2\x001bR");
+            new_string = new Regex("<C([0-9])>(.*?)<\\/C[0-9]>").Replace(new_string, "\x001bC$1$2\x001bR");
             new_string = new Regex("<ismale character=\"([0-9]{2})\">(.*?)<else/>(.*?)</ismale>").Replace(new_string, "\x001bEK$1$2\x001bEL$1$3\x001bEM$1");
             new_string = new Regex("<string id=\"([0-9])\" />").Replace(new_string, "\x001bS$1");
             new_string = new Regex("\\%").Replace(new_string, "\x001b%");
