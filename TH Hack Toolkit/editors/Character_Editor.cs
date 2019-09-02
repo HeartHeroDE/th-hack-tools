@@ -20,67 +20,83 @@ namespace th_hack_tools
         public THCharacter current_character;
         public bool reload = false;
 
+        private List<THCharacter> Character_data;
+
         public Character_Editor()
         {
             InitializeComponent();
         }
 
+        public THCharacter get_character(int index)
+        {
+            return Character_data[index];
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            foreach(int character in Program.THData.get_character_strings().Keys)
+            TextTable text_table = (TextTable)Program.THData.controller.Main_Tables[0].Tables[1];
+            string[] text_en = text_table.get_contents(2).ToArray();
+
+            Character_data = new List<THCharacter>();
+            for (int i = 0; i < Program.THData.get_character_table().Tables[3].contents.Count; i++)
             {
-                List_Characters.Items.Add("0x" + character.ToString("X2") + " " + Program.THData.get_character_strings()[character]);
-                Box_Model.Items.Add("0x" + character.ToString("X2") + " " + Program.THData.get_character_strings()[character]);
+                Character_data.Add(new THCharacter(Program.THData.get_character_table(), i));
             }
 
-            foreach (int crest in Program.THData.get_crest_strings().Keys)
+            foreach (int character in Program.THData.get_character_strings(text_en).Keys)
             {
-                Box_CrestFirst.Items.Add("0x" + crest.ToString("X2") + " " + Program.THData.get_crest_strings()[crest]);
-                Box_CrestSecond.Items.Add("0x" + crest.ToString("X2") + " " + Program.THData.get_crest_strings()[crest]);
+                List_Characters.Items.Add("0x" + character.ToString("X2") + " " + Program.THData.get_character_strings(text_en)[character]);
+                Box_Model.Items.Add("0x" + character.ToString("X2") + " " + Program.THData.get_character_strings(text_en)[character]);
             }
 
-            foreach (int character_class in Program.THData.get_class_strings().Keys)
+            foreach (int crest in Program.THData.get_crest_strings(text_en).Keys)
             {
-                Box_Classes.Items.Add("0x" + character_class.ToString("X2") + " " + Program.THData.get_class_strings()[character_class]);
+                Box_CrestFirst.Items.Add("0x" + crest.ToString("X2") + " " + Program.THData.get_crest_strings(text_en)[crest]);
+                Box_CrestSecond.Items.Add("0x" + crest.ToString("X2") + " " + Program.THData.get_crest_strings(text_en)[crest]);
             }
 
-            foreach (int spell in Program.THData.get_spell_strings().Keys)
+            foreach (int character_class in Program.THData.get_class_strings(text_en).Keys)
             {
-                Box_SpellFaith1.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellFaith2.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellFaith3.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellFaith4.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellFaith5.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-
-                Box_SpellReason1.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellReason2.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellReason3.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellReason4.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
-                Box_SpellReason5.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings()[spell]);
+                Box_Classes.Items.Add("0x" + character_class.ToString("X2") + " " + Program.THData.get_class_strings(text_en)[character_class]);
             }
 
-            foreach (int skill in Program.THData.get_skill_strings().Keys)
+            foreach (int spell in Program.THData.get_spell_strings(text_en).Keys)
             {
-                Box_SkillPersonal.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_SkillTimeskip.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
+                Box_SpellFaith1.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellFaith2.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellFaith3.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellFaith4.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellFaith5.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
 
-                Box_Skill3.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill4.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill5.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill6.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill7.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill8.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill9.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
+                Box_SpellReason1.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellReason2.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellReason3.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellReason4.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
+                Box_SpellReason5.Items.Add("0x" + spell.ToString("X2") + " " + Program.THData.get_spell_strings(text_en)[spell]);
             }
 
-            foreach (int art in Program.THData.get_art_strings().Keys)
+            foreach (int skill in Program.THData.get_skill_strings(text_en).Keys)
             {
-                Box_CombatArt1.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
-                Box_CombatArt2.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
-                Box_CombatArt3.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
-                Box_CombatArt4.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
-                Box_CombatArt5.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
+                Box_SkillPersonal.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_SkillTimeskip.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+
+                Box_Skill3.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill4.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill5.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill6.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill7.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill8.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill9.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+            }
+
+            foreach (int art in Program.THData.get_art_strings(text_en).Keys)
+            {
+                Box_CombatArt1.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings(text_en)[art]);
+                Box_CombatArt2.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings(text_en)[art]);
+                Box_CombatArt3.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings(text_en)[art]);
+                Box_CombatArt4.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings(text_en)[art]);
+                Box_CombatArt5.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings(text_en)[art]);
             }
 
         }
@@ -89,7 +105,7 @@ namespace th_hack_tools
         {
             reload = true;
             string character_name = List_Characters.SelectedItem.ToString();
-            current_character = Program.THData.get_character(List_Characters.SelectedIndex);
+            current_character = get_character(List_Characters.SelectedIndex);
 
             pictureBox1.Image = GetImageByName(Regex.Match(character_name, @"0x[0-9a-fA-F]+ (.*)").Groups[1].Value + "_s");
             Text_Name.Text = character_name;
@@ -631,12 +647,13 @@ namespace th_hack_tools
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Program.THData.initiate_data();
-            Close();
-        }
+            TableController new_charactertable = Program.THData.controller.Main_Tables[12];
+            foreach (THCharacter character in Character_data)
+            {
+                character.Write(ref new_charactertable);
+            }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+            Program.THData.controller.Main_Tables[12] = new_charactertable;
             Close();
         }
 

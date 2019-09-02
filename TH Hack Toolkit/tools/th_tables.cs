@@ -16,9 +16,9 @@ namespace th_hack_tools
 
         public List<ITable> Tables;
         public int total_length = 0;
-        int offset;
+        long offset;
 
-        public TableController(FileStream stream, int _offset = 0)
+        public TableController(FileStream stream, long _offset = 0)
         {
             offset = _offset;
             byte[] bits = new byte[4];
@@ -84,17 +84,20 @@ namespace th_hack_tools
             }
         }
 
-        public List<byte> Write(string file)
+        public List<byte> Write()
         {
             List<byte> new_header = new List<byte>();
             List<byte> new_data = new List<byte>();
 
             new_header.AddRange(BitConverter.GetBytes(Tables.Count));
 
+            
             int table_offset = 4 + Tables.Count * 8;
+            total_length = table_offset;
             foreach (ITable table in Tables)
             {
                 List<byte> new_table = table.Save();
+                
 
                 new_header.AddRange(BitConverter.GetBytes(table_offset));
                 new_header.AddRange(BitConverter.GetBytes(new_table.Count));
@@ -104,30 +107,16 @@ namespace th_hack_tools
                     new_table.Add((byte)0);
                 }
 
+                total_length += new_table.Count;
                 new_data.AddRange(new_table);
                 table_offset += new_table.Count;
             }
 
-            // Add contents to end of header and write using MemoryMapping for better performance
+            // Add contents to end of header
 
             new_header.AddRange(new_data);
 
             return new_header;
-
-            //using (var mmf = MemoryMappedFile.CreateFromFile(file, FileMode.Open, "table_" + offset))
-            //{
-            //    using (var accessor = mmf.CreateViewAccessor(offset, new_header.Count))
-            //    {
-
-            //        // Make changes to the view.
-            //        for (int i = 0; i < new_header.Count; i++)
-            //        {
-            //            accessor.Write(i, new_header[i]);
-            //        }
-            //    }
-            //}
-
-            //Console.Write("Wrote Table Controller.");
         }
 
     }
@@ -182,18 +171,21 @@ namespace th_hack_tools
 
         public List<byte> Save()
         {
+            total_length = 64;
             byte[] item_count_raw = BitConverter.GetBytes(contents.Count);
             Array.Copy(item_count_raw, 0, header, 4, 4);
 
             List<byte> new_table = new List<byte>();
             new_table.AddRange(header);
 
-            
+            int item_length = BitConverter.ToInt32(header, 8);
+
             foreach (byte[] item in contents)
             {
                 new_table.AddRange(item);
             }
 
+            total_length += contents.Count * item_length;
             return new_table;
         }
 
@@ -237,14 +229,53 @@ namespace th_hack_tools
             total_length = table_offsets.Last() + table_lengths.Last();
         }
 
+        public short get_type(int archive)
+        {
+            return archives[archive].type;
+        }
+
+        public int get_args1(int archive, int string_index)
+        {
+            if (get_type(archive) == 2)
+                return archives[archive].args1[string_index];
+            else
+                return -1;
+        }
+
+        public int get_args2(int archive, int string_index)
+        {
+            if (get_type(archive) == 2)
+                return archives[archive].args2[string_index];
+            else
+                return -1;
+        }
+
+        public void set_arg1(int archive, int arg, int index)
+        {
+            archives[archive].args1[index] = arg;
+        }
+
+        public void set_arg2(int archive, int arg, int index)
+        {
+            archives[archive].args2[index] = arg;
+        }
+
+        public List<string> get_contents(int archive)
+        {
+            List<string> strings = archives[archive].load_contents(contents[archive]);
+            return strings;
+        }
+
+        public void set_contents(int archive, List<string> new_contents)
+        {
+            contents[archive] = archives[archive].Write(new_contents);
+        }
+
         public List<byte> Save()
         {
             total_length = 0;
             for (int i=0; i < archives.Count; i++)
             {
-                archives[i].Write();
-                contents[i] = archives[i].raw;
-
                 total_length += contents[i].Length;
             }
 
@@ -298,58 +329,74 @@ namespace th_hack_tools
     public class Text_Archive
     {
         
-        byte[] header = new byte[20];
-        List<int> pointers = new List<int>();
+        byte[] header;
+        public List<uint> pointers = new List<uint>();
+        public short type = 1;
 
-        public byte[] raw;
-        public List<string> contents = new List<string>();
-
-        int return_total_length()
-        {
-            return BitConverter.ToInt16(header, 4);
-        }
-
-        int return_pointer_count()
-        {
-            return BitConverter.ToInt16(header, 8);
-        }
+        public List<int> args1 = new List<int>(); // only if type=2
+        public List<int> args2 = new List<int>(); // only if type=2
 
         public Text_Archive(byte[] bin)
         {
-            raw = bin;
-            header = bin.Take(20).ToArray();
+            int header_size = BitConverter.ToInt16(bin, 12);
+            int pointer_size = BitConverter.ToInt16(bin, 10);
 
-            int pointer_count = return_pointer_count();
-            int pointer_end = pointer_count * 4 + header.Length;
+            if (header_size >= 24)
+                type = 2;
 
-            for (int i = header.Length; i < pointer_end; i += 4)
+            header = bin.Take(header_size).ToArray();
+
+            int pointer_count = BitConverter.ToInt16(header, 8);
+            int pointer_end = pointer_count * pointer_size + header.Length;
+
+            for (int i = header.Length; i < pointer_end; i += pointer_size)
             {
-                int pointer = BitConverter.ToInt32(raw, i);
+                uint pointer = BitConverter.ToUInt32(bin, i);
                 pointers.Add(pointer);
-            }
 
-            foreach (int pointer in pointers)
-            {
-                int i = pointer + header.Length;
-                List<byte> current_string = new List<byte>();
-                while (raw[i] != 0)
+                if (type == 2)
                 {
-                    current_string.Add(raw[i]);
-                    i++;
+                    int character = BitConverter.ToInt32(bin, i+4);
+                    args1.Add(character);
+
+                    int voice = BitConverter.ToInt32(bin, i + 8);
+                    args2.Add(voice);
+
                 }
-                contents.Add(Encoding.UTF8.GetString(current_string.ToArray()));
+
             }
 
         }
 
-        public void Write()
+        public List<string> load_contents(byte[] bin)
+        {
+            List<string> strings = new List<string>();
+            foreach (uint pointer in pointers)
+            {
+                uint i = pointer + (uint)header.Length;
+                List<byte> current_string = new List<byte>();
+                while (i < bin.Length)
+                {
+                    if (bin[i] != 0)
+                        current_string.Add(bin[i]);
+                    else
+                        break;
+                    i++;
+                }
+                strings.Add(Encoding.UTF8.GetString(current_string.ToArray()));
+            }
+            return strings;
+        }
+
+        public byte[] Write(List<string> contents)
         {
             List<uint> new_pointers = new List<uint>();
             List<byte> new_contents = new List<byte>();
             List<byte> pointers_raw = new List<byte>();
 
+            int pointer_size = BitConverter.ToInt16(header, 10);
 
-            int pos = contents.Count * 4;
+            int pos = contents.Count * pointer_size;
             foreach (string s in contents)
             {
                 byte[] string_raw = Encoding.UTF8.GetBytes(s);
@@ -363,6 +410,8 @@ namespace th_hack_tools
             byte[] new_header = header;
 
             ushort pointer_count = (ushort)new_pointers.Count;
+            int pointer_end = pointer_count * pointer_size + header.Length;
+
             Array.Copy(BitConverter.GetBytes(pointer_count), 0, new_header, 8, 2);
 
             foreach (int pointer in new_pointers)
@@ -381,8 +430,21 @@ namespace th_hack_tools
 
             Array.Copy(BitConverter.GetBytes((ushort)total_length), 0, newbin, 4, 2);
 
-            raw = newbin;
-            header = newbin.Take(20).ToArray();
+            if (type == 2)
+            {
+                int current = 0;
+                for (int i = new_header.Length; i < pointer_end; i += pointer_size)
+                {
+                    Array.Copy(BitConverter.GetBytes(args1[current]), 0, newbin, i + 4, 4);
+                    Array.Copy(BitConverter.GetBytes(args2[current]), 0, newbin, i + 8, 4);
+                    current++;
+                }
+            }
+
+            header = newbin.Take(header.Length).ToArray();
+            pointers = new_pointers;
+
+            return newbin;
         }
 
     }

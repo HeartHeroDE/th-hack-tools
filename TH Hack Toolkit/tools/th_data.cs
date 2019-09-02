@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
@@ -8,83 +9,147 @@ using System.Threading.Tasks;
 
 namespace th_hack_tools
 {
-    public class th_data
+    /// <summary>
+    /// Reads the file structure of DATA1.bin by using DATA0.bin
+    /// </summary>
+    public class th_structure
     {
-        private TableController CharacterTable;
-        private TableController ClassTable;
-        private TableController StringTable;
-        private TextTable texts;
+        public string path;
 
-        FileStream fs;
+        public List<long> offsets = new List<long>();
+        public List<int> lengths = new List<int>();
+        public List<int> lengths2 = new List<int>();
+        public List<bool> unknown = new List<bool>();
 
-        private List<THCharacter> Character_data;
-        private List<THClass> Class_data;
-        public THClassLevels ClassLevels;
+        // TODO: Understand how the two lengths work, doesn't matter for table data though.
 
-        int string_table_end = 0;      // Offset for chunks after string table
-        int chunks_between = 0x8AFBD4; // Chunks between text and class data
-        int edit_size = 0;             // Total area of bytes that is editable starting from top
-
-        /// <summary>
-        /// Loads Three Houses Data with support for expansions
-        /// </summary>
-        /// <param name="file">Path to Data1.bin</param>
-        public th_data(string file)
+        public th_structure(string file)
         {
-            int relative_offset = 0;
+            path = file;
 
-            fs = new FileStream(file, FileMode.Open);
-            StringTable = new TableController(fs, relative_offset);
+            using (FileStream reader = new FileStream(file, FileMode.Open, FileAccess.Read))
+            {
 
-            string_table_end = StringTable.total_length;
-            relative_offset += string_table_end + chunks_between;
-            ClassTable = new TableController(fs, relative_offset);
+                byte[] buffer = new Byte[32];
+                int bytesRead;
 
-            relative_offset += ClassTable.total_length;
-            CharacterTable = new TableController(fs, relative_offset);
-            edit_size = relative_offset + CharacterTable.total_length;
+                while ((bytesRead =
+                        reader.Read(buffer, 0, 32)) > 0)
+                {
+                    long current_offset = BitConverter.ToInt64(buffer, 0);
+                    int current_length = BitConverter.ToInt32(buffer, 8);
+                    int current_length2 = BitConverter.ToInt32(buffer, 16);
+                    bool current_unknown = BitConverter.ToBoolean(buffer, 24);
+                    offsets.Add(current_offset);
+                    lengths.Add(current_length);
+                    lengths2.Add(current_length2);
+                    unknown.Add(current_unknown);
+                }
+
+                reader.Close();
+            }
+        }
+
+        public void Write(string file, th_structure old_structure)
+        {
+            using (FileStream writer = new FileStream(file, FileMode.Create, FileAccess.Write))
+            {
+                int offset_difference = 0;
+                for (int i = 0; i < offsets.Count; i++)
+                {
+                    offsets[i] += offset_difference;
+
+                    writer.Write(BitConverter.GetBytes(offsets[i]), 0, 8);
+
+                    writer.Write(BitConverter.GetBytes(lengths[i]), 0, 4);
+                    writer.Write(new byte[4] { 0, 0, 0, 0 }, 0, 4);
+
+                    writer.Write(BitConverter.GetBytes(lengths2[i]), 0, 4);
+                    writer.Write(new byte[4] { 0, 0, 0, 0 }, 0, 4);
+
+                    writer.Write(BitConverter.GetBytes(unknown[i]), 0, 1);
+                    writer.Write(new byte[7] { 0, 0, 0, 0, 0, 0, 0 }, 0, 7);
+
+                    offset_difference += lengths[i] - old_structure.lengths[i];
+                }
+                writer.Close();
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Manages the entire read/write processes
+    /// </summary>
+    public class FileController
+    {
+        public SortedList<int, TableController> Main_Tables = new SortedList<int, TableController>();
+
+        private th_structure Structure;
+        private FileStream fs;
+        private BackgroundWorker worker;
+
+        string data_0 = "";
+        string data_1 = "";
+        string writing_directory = "";
+
+        public FileController(string directory)
+        {
+            data_0 = directory + Path.DirectorySeparatorChar + "DATA0.bin";
+            data_1 = directory + Path.DirectorySeparatorChar + "DATA1.bin";
+
+            if (File.Exists(data_0))
+                Structure = new th_structure(data_0);
+            else
+                throw new ArgumentException("Couldn't find Data0.bin", "FileController");
+
+            if (File.Exists(data_1))
+                fs = new FileStream(directory + Path.DirectorySeparatorChar + "DATA1.bin", FileMode.Open, FileAccess.Read);
+            else
+                throw new ArgumentException("Couldn't find Data1.bin", "FileController");
+
+            // Add Tables to list
+
+            Main_Tables.Add(0, new TableController(fs, Structure.offsets[0]));
+            Main_Tables.Add(1, new TableController(fs, Structure.offsets[1]));
+            Main_Tables.Add(2, new TableController(fs, Structure.offsets[2]));
+            Main_Tables.Add(3, new TableController(fs, Structure.offsets[3]));
+            Main_Tables.Add(4, new TableController(fs, Structure.offsets[4]));
+
+            Main_Tables.Add(11, new TableController(fs, Structure.offsets[11]));
+            Main_Tables.Add(12, new TableController(fs, Structure.offsets[12]));
 
             fs.Close();
-            initiate_data();
 
-            Console.WriteLine("Initiated TH Data.");
+            worker = new BackgroundWorker();
+            worker.WorkerSupportsCancellation = false;
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += DoWork;
         }
 
-        public void initiate_data()
+        private void write_nullbytes(int key, FileStream writer)
         {
-            texts = (TextTable)StringTable.Tables[1];
-
-            Character_data = new List<THCharacter>();
-            for (int i = 0; i < get_character_strings().Count; i++)
-            {
-                Character_data.Add(new THCharacter(CharacterTable, i));
-            }
-
-
-            Class_data = new List<THClass>();
-            for (int i = 0; i < get_class_strings().Count; i++)
-            {
-                Class_data.Add(new THClass(ClassTable, i));
-            }
-            ClassLevels = new THClassLevels(ClassTable.Tables[2]);
+            int nullbytes = (int)(Structure.offsets[key + 1] - Structure.offsets[key] - Structure.lengths[key]);
+            for (int i = 0; i < nullbytes; i++)
+                writer.WriteByte(0);
         }
 
-        Dictionary<int, string> read_name_table(Text_Archive archive, int start = 0, int items = 1)
+        public void Write(string directory)
         {
-            Dictionary<int, string> NameTable = new Dictionary<int, string>();
 
-            int index = 0;
-            for (int i=start; i < start + items; i++)
+            if (directory == Path.GetDirectoryName(data_1))
             {
-                NameTable.Add(index, archive.contents[i]);
-                index++;
+                throw new ArgumentException("Overwriting source files is not possible.\nChoose another location.", "FileController");
             }
-
-            return NameTable;
+            else
+            {
+                writing_directory = directory;
+                worker.RunWorkerAsync();
+            }
 
         }
 
-        byte[] read_seek(int offset, int length)
+        byte[] read_seek(long offset, int length)
         {
             byte[] bits = new byte[length];
             fs.Seek(offset, SeekOrigin.Begin);
@@ -92,116 +157,186 @@ namespace th_hack_tools
             return bits;
         }
 
-        public THCharacter get_character(int index)
+        private void DoWork(object sender, DoWorkEventArgs e)
         {
-            return Character_data[index];
+            string data_0_new = writing_directory + Path.DirectorySeparatorChar + "DATA0.bin";
+            string data_1_new = writing_directory + Path.DirectorySeparatorChar + "DATA1.bin";
+
+            fs = new FileStream(data_1, FileMode.Open, FileAccess.Read);
+
+            // Begin writing DATA1.bin
+
+            using (FileStream writer = new FileStream(data_1_new, FileMode.Create, FileAccess.Write))
+            {
+                // Write table data
+
+                for (int i = 0; i < Main_Tables.Count; i++)
+                {
+                    KeyValuePair<int, TableController> entry = Main_Tables.ElementAt(i);
+                    List<byte> current_table = entry.Value.Write();
+
+                    writer.Write(current_table.ToArray(), 0, current_table.Count);
+                    write_nullbytes(entry.Key, writer);
+
+                    // Write chunks from original file if files are getting skipped
+                    if (!Main_Tables.ContainsKey(entry.Key + 1) && i < Main_Tables.Count - 1)
+                    {
+
+                        int current_entry = entry.Key;
+                        int next_entry = Main_Tables.ElementAt(i + 1).Key;
+
+                        int chunk_area = (int)(Structure.offsets[next_entry] - Structure.offsets[current_entry + 1]);
+                        byte[] chunks = read_seek(Structure.offsets[current_entry + 1], chunk_area);
+                        writer.Write(chunks, 0, chunk_area);
+
+                    }
+
+                }
+
+                // Begin appending old, unedited data to new file
+                fs.Seek(Structure.offsets[Main_Tables.Last().Key + 1], SeekOrigin.Begin);
+
+                // create a buffer to hold the bytes 
+                int bufferSize = 1024;
+                byte[] buffer = new byte[bufferSize];
+
+                int bytesRead = -1;
+                long totalReads = 0;
+                int prevPercent = 0;
+                long totalBytes = fs.Length;
+
+                // while the read method returns bytes
+                // keep writing them to the output stream
+                while ((bytesRead = fs.Read(buffer, 0, bufferSize)) > 0)
+                {
+                    writer.Write(buffer, 0, bytesRead);
+                    totalReads += bytesRead;
+                    int percent = Convert.ToInt32(((decimal)totalReads / (decimal)totalBytes) * 100);
+                    if (percent != prevPercent)
+                    {
+                        worker.ReportProgress(percent);
+                        prevPercent = percent;
+                    }
+                }
+
+                writer.Close();
+
+            }
+
+            // Begin writing DATA0.bin
+
+            th_structure Structure_New = new th_structure(data_0);
+
+            foreach (KeyValuePair<int, TableController> entry in Main_Tables)
+            {
+                Structure_New.lengths[entry.Key] = entry.Value.total_length;
+            }
+
+            Structure_New.Write(data_0_new, Structure);
+
+            fs.Close();
         }
 
-        public THClass get_class(int index)
+        public event ProgressChangedEventHandler ProgressChanged
         {
-            return Class_data[index];
+            add { worker.ProgressChanged += value; }
+            remove { worker.ProgressChanged -= value; }
         }
 
-        public Dictionary<int, string> get_character_strings()
+        public event RunWorkerCompletedEventHandler Completed
         {
-            Dictionary<int, string> Characters = read_name_table(texts.archives[2], 1156, 37);
+            add { worker.RunWorkerCompleted += value; }
+            remove { worker.RunWorkerCompleted -= value; }
+        }
+
+    }
+
+    /// <summary>
+    /// Provides help functions for easily accessing information from tables
+    /// </summary>
+    public class th_data
+    {
+        public FileController controller;
+
+        //public List<string> text_en = new List<string>();
+
+        public th_data(string directory)
+        {
+            controller = new FileController(directory);
+
+            Console.WriteLine("Initiated TH Data.");
+        }
+
+        public TableController get_character_table()
+        {
+            return controller.Main_Tables[12];
+        }
+
+        public TableController get_class_table()
+        {
+            return controller.Main_Tables[11];
+        }
+
+        Dictionary<int, string> read_archive(string[] strings, int start = 0, int items = 1)
+        {
+            Dictionary<int, string> NameTable = new Dictionary<int, string>();
+
+            int index = 0;
+            for (int i=start; i < start + items; i++)
+            {
+                NameTable.Add(index, strings[i]);
+                index++;
+            }
+
+            return NameTable;
+
+        }
+
+        public Dictionary<int, string> get_character_strings(string[] strings)
+        {
+            Dictionary<int, string> Characters = read_archive(strings, 1156, 522);
             Characters[0] = Characters[0] + " (Male)";
             Characters[1] = Characters[1] + " (Female)";
             return Characters;
         }
 
-        public Dictionary<int, string> get_class_strings()
+        public Dictionary<int, string> get_class_strings(string[] strings)
         {
-            return read_name_table(texts.archives[2], 3452, 90);
+            return read_archive(strings, 3452, 90);
         }
 
-        public Dictionary<int, string> get_crest_strings()
+        public Dictionary<int, string> get_crest_strings(string[] strings)
         {
-            Dictionary<int, string> Crests = read_name_table(texts.archives[2], 9556, 48);
+            Dictionary<int, string> Crests = read_archive(strings, 9556, 48);
             Crests.Add(0xFF, "No Crest");
             return Crests;
         }
 
-        public Dictionary<int, string> get_spell_strings()
+        public Dictionary<int, string> get_spell_strings(string[] strings)
         {
-            Dictionary<int, string> Spells = read_name_table(texts.archives[2], 7802, 38);
+            Dictionary<int, string> Spells = read_archive(strings, 7802, 38);
             Spells.Add(0xFF, "No Spell");
             return Spells;
         }
-        public Dictionary<int, string> get_skill_strings()
+        public Dictionary<int, string> get_skill_strings(string[] strings)
         {
-            Dictionary<int, string> Skills = read_name_table(texts.archives[2], 7202, 238);
+            Dictionary<int, string> Skills = read_archive(strings, 7202, 238);
             Skills.Add(0xFF, "No Skill");
             return Skills;
         }
 
-        public Dictionary<int, string> get_art_strings()
+        public Dictionary<int, string> get_art_strings(string[] strings)
         {
-            Dictionary<int, string> Arts = read_name_table(texts.archives[2], 5980, 77);
+            Dictionary<int, string> Arts = read_archive(strings, 5980, 77);
             Arts.Add(0xFF, "No Art");
             return Arts;
         }
 
-        public Dictionary<int, string> get_item_strings()
+        public Dictionary<int, string> get_item_strings(string[] strings)
         {
-            Dictionary<int, string> Items = read_name_table(texts.archives[2], 4622, 26);
+            Dictionary<int, string> Items = read_archive(strings, 4622, 26);
             Items.Add(0xFF, "No Item");
             return Items;
-        }
-
-        public void Save(string file)
-        {
-
-            fs = new FileStream(fs.Name, FileMode.Open);
-            byte[] chunks = read_seek(string_table_end, chunks_between);
-
-            foreach (THCharacter character in Character_data)
-            {
-                character.Write(ref CharacterTable);
-            }
-
-            foreach (THClass current_class in Class_data)
-            {
-                current_class.Write(ref ClassTable);
-            }
-
-            // Writing files in correct order
-
-            using (FileStream writer = new FileStream(file, FileMode.Create, FileAccess.Write))
-            {
-                List<byte> strings = StringTable.Write(file);
-                writer.Write(strings.ToArray(), 0, strings.Count);
-
-                writer.Write(chunks, 0, chunks_between);
-
-                ClassLevels.Write(ref ClassTable);
-
-                List<byte> classes = ClassTable.Write(file);
-                writer.Write(classes.ToArray(), 0, classes.Count);
-
-                List<byte> characters = CharacterTable.Write(file);
-                writer.Write(characters.ToArray(), 0, characters.Count);
-
-
-                // Begin appending old, unedited data to new file
-                fs.Seek(edit_size, SeekOrigin.Begin);
-
-                // create a buffer to hold the bytes 
-                byte[] buffer = new Byte[1024];
-                int bytesRead;
-
-                // while the read method returns bytes
-                // keep writing them to the output stream
-                while ((bytesRead =
-                        fs.Read(buffer, 0, 1024)) > 0)
-                {
-                    writer.Write(buffer, 0, bytesRead);
-                }
-
-                writer.Close();
-            }
-
-            fs.Close();
         }
 
     }

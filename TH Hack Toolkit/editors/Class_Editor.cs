@@ -16,29 +16,46 @@ namespace th_hack_tools
         public THClass current_class;
         public bool reload = false;
 
+        private List<THClass> Class_data;
+
         public Class_Editor()
         {
             InitializeComponent();
         }
 
+        public THClass get_class(int index)
+        {
+            return Class_data[index];
+        }
+
         private void Class_Editor_Load(object sender, EventArgs e)
         {
-            foreach (int current_class in Program.THData.get_class_strings().Keys)
+
+            TextTable text_table = (TextTable)Program.THData.controller.Main_Tables[0].Tables[1];
+            string[] text_en = text_table.get_contents(2).ToArray();
+
+            Class_data = new List<THClass>();
+            for (int i = 0; i < Program.THData.get_class_table().Tables[0].contents.Count; i++)
             {
-                List_Classes.Items.Add("0x" + current_class.ToString("X2") + " " + Program.THData.get_class_strings()[current_class]);
+                Class_data.Add(new THClass(Program.THData.get_class_table(), i));
             }
 
-            foreach (int skill in Program.THData.get_skill_strings().Keys)
+            foreach (int current_class in Program.THData.get_class_strings(text_en).Keys)
             {
-                Box_Skill_Mastery.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill_1.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill_2.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
-                Box_Skill_3.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings()[skill]);
+                List_Classes.Items.Add("0x" + current_class.ToString("X2") + " " + Program.THData.get_class_strings(text_en)[current_class]);
             }
 
-            foreach (int art in Program.THData.get_art_strings().Keys)
+            foreach (int skill in Program.THData.get_skill_strings(text_en).Keys)
             {
-                Box_Art_Mastery.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings()[art]);
+                Box_Skill_Mastery.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill_1.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill_2.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+                Box_Skill_3.Items.Add("0x" + skill.ToString("X2") + " " + Program.THData.get_skill_strings(text_en)[skill]);
+            }
+
+            foreach (int art in Program.THData.get_art_strings(text_en).Keys)
+            {
+                Box_Art_Mastery.Items.Add("0x" + art.ToString("X2") + " " + Program.THData.get_art_strings(text_en)[art]);
             }
 
         }
@@ -47,7 +64,7 @@ namespace th_hack_tools
         {
             reload = true;
             string class_name = List_Classes.SelectedItem.ToString();
-            current_class = Program.THData.get_class(List_Classes.SelectedIndex);
+            current_class = get_class(List_Classes.SelectedIndex);
 
             Text_Name.Text = class_name;
 
@@ -329,14 +346,15 @@ namespace th_hack_tools
                 current_class.Values["exp_flying"].Value = (int)((NumericUpDown)sender).Value;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Program.THData.initiate_data();
-            Close();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
+            TableController new_classtable = Program.THData.controller.Main_Tables[11];
+            foreach (THClass current_class in Class_data)
+            {
+                current_class.Write(ref new_classtable);
+            }
+
+            Program.THData.controller.Main_Tables[11] = new_classtable;
             Close();
         }
 

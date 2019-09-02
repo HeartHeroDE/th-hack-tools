@@ -37,6 +37,7 @@
             this.Button_OpenFile = new System.Windows.Forms.Button();
             this.Button_Github = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.Progress_Save = new System.Windows.Forms.ProgressBar();
             this.Group_Editors.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -55,13 +56,13 @@
             // Button_ItemEditor
             // 
             this.Button_ItemEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Button_ItemEditor.Enabled = false;
             this.Button_ItemEditor.Location = new System.Drawing.Point(3, 83);
             this.Button_ItemEditor.Name = "Button_ItemEditor";
             this.Button_ItemEditor.Size = new System.Drawing.Size(182, 34);
             this.Button_ItemEditor.TabIndex = 2;
-            this.Button_ItemEditor.Text = "Item Editor";
+            this.Button_ItemEditor.Text = "Text Editor";
             this.Button_ItemEditor.UseVisualStyleBackColor = true;
+            this.Button_ItemEditor.Click += new System.EventHandler(this.Button_ItemEditor_Click);
             // 
             // Button_CharacterEditor
             // 
@@ -130,13 +131,21 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Version 0.3";
+            this.label1.Text = "Version 0.4";
+            // 
+            // Progress_Save
+            // 
+            this.Progress_Save.Location = new System.Drawing.Point(16, 164);
+            this.Progress_Save.Name = "Progress_Save";
+            this.Progress_Save.Size = new System.Drawing.Size(385, 23);
+            this.Progress_Save.TabIndex = 8;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 170);
+            this.ClientSize = new System.Drawing.Size(423, 200);
+            this.Controls.Add(this.Progress_Save);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Button_Github);
             this.Controls.Add(this.Button_OpenFile);
@@ -163,5 +172,6 @@
         private System.Windows.Forms.Button Button_OpenFile;
         private System.Windows.Forms.Button Button_Github;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar Progress_Save;
     }
 }
