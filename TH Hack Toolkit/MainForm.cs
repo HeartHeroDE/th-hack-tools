@@ -48,7 +48,7 @@ namespace th_hack_tools
 
                         Text = current_file + " - " + "TH Hacking Toolkit";
                         Button_OpenFile.Text = "Save File";
-                        Group_Editors.Enabled = true;
+                        Panel_ROM.Enabled = true;
                     }
                     catch (Exception ex)
                     {
@@ -78,7 +78,7 @@ namespace th_hack_tools
                     Program.THData.controller.ProgressChanged += SaveProgressChanged;
                     Program.THData.controller.Write(Path.GetDirectoryName(current_file));
                 }
-            }
+            } 
 
         }
 
@@ -117,6 +117,22 @@ namespace th_hack_tools
         private void Button_ItemEditor_Click(object sender, EventArgs e)
         {
             using (editors.Text_Editor editor = new editors.Text_Editor())
+            {
+                editor.ShowDialog();
+            }
+        }
+
+        private void Button_KTSL2STBIN_Extractor_Click(object sender, EventArgs e)
+        {
+            using (editors.audio.KTSL2STBIN_Extractor editor = new editors.audio.KTSL2STBIN_Extractor())
+            {
+                editor.ShowDialog();
+            }
+        }
+
+        private void Button_KTSS_Exporter_Click(object sender, EventArgs e)
+        {
+            using (editors.audio.KTSS_Interpreter editor = new editors.audio.KTSS_Interpreter())
             {
                 editor.ShowDialog();
             }

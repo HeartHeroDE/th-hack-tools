@@ -49,6 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="editors\audio\KTSL2STBIN Extractor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editors\audio\KTSL2STBIN Extractor.Designer.cs">
+      <DependentUpon>KTSL2STBIN Extractor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editors\audio\KTSS Exporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editors\audio\KTSS Exporter.Designer.cs">
+      <DependentUpon>KTSS Exporter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editors\audio\th_audio.cs" />
     <Compile Include="editors\Character_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +116,13 @@
     </Compile>
     <Compile Include="tools\th_data.cs" />
     <Compile Include="tools\th_tables.cs" />
+    <Compile Include="tools\th_utils.cs" />
+    <EmbeddedResource Include="editors\audio\KTSL2STBIN Extractor.resx">
+      <DependentUpon>KTSL2STBIN Extractor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editors\audio\KTSS Exporter.resx">
+      <DependentUpon>KTSS Exporter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="editors\Character_Editor.resx">
       <DependentUpon>Character_Editor.cs</DependentUpon>
     </EmbeddedResource>
@@ -254,10 +274,14 @@
     <None Include="Resources\Character.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="editors\audio\opusenc.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <None Include="Resources\Byleth %28Male%29_s.png" />
     <None Include="Resources\Byleth %28Female%29_s.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
