@@ -91,6 +91,7 @@
             this.Panel_ROM.Controls.Add(this.Button_ItemEditor, 0, 2);
             this.Panel_ROM.Controls.Add(this.Button_ClassEditor, 0, 1);
             this.Panel_ROM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_ROM.Enabled = false;
             this.Panel_ROM.Location = new System.Drawing.Point(3, 3);
             this.Panel_ROM.Name = "Panel_ROM";
             this.Panel_ROM.Padding = new System.Windows.Forms.Padding(6);
